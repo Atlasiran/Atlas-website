@@ -12,13 +12,17 @@ users_password: str = os.getenv("SUPABASE_USERS_PASSWORD", "")
 supabase: Client = create_client(url, key)
 
 # a function that gets the logo of an entity
+
+
 def get_logo(entity):
     # if a .png file exists with this id in /logos folder, return it
     # otherwise, return a placeholder
     if os.path.exists(f"../static/logos/{entity.get('id', '')}.png"):
         return f"logos/{entity.get('id', '')}.png"
     else:
-        return "logos/placeholder.png"
+        return "logos/temporary.png"
+
+
 def reshape_data(entity):
     reshaped_entity = {
         "id": entity.get("id", ""),
@@ -40,7 +44,7 @@ def reshape_data(entity):
         "history": entity.get("history", ""),
         "manifest": entity.get("manifest", ""),
         "codeOfConduct": entity.get("codeOfConduct", ""),
-        "estimation_of_members": "" if entity.get("estimation_of_members") == -1 else entity.get("estimation_of_members"),
+        "estimationOfMembers": "" if entity.get("estimationOfMembers") == -1 else entity.get("estimationOfMembers"),
         "projects": entity.get("projects", ""),
         "others1": entity.get("others1", ""),
         "others2": entity.get("others2", ""),
@@ -52,10 +56,11 @@ def reshape_data(entity):
     }
     return reshaped_entity
 
+
 def main():
     user = supabase.auth.sign_in_with_password({
-        "email": users_email, 
-        "password": users_password 
+        "email": users_email,
+        "password": users_password
     })
 
     data = supabase.table("Entities").select("*").execute()
@@ -64,20 +69,18 @@ def main():
 
     reshaped_data = [reshape_data(entity) for entity in data.data]
 
-
     this_file_path = os.path.abspath(__file__)
     this_dir_path = os.path.dirname(this_file_path)
-    data_file_path = os.path.join(this_dir_path,'..' , 'static' , 'data', "data.json")
+    data_file_path = os.path.join(
+        this_dir_path, '..', 'static', 'data', "data.json")
 
     # Write reshaped data to a json file
     with open(data_file_path, "w", encoding='utf-8') as json_file:
         json.dump(reshaped_data, json_file, ensure_ascii=False, indent=4)
-    
-
 
     # cancel all threads
     threads = os.sched_getaffinity(0)
-    # close 
+    # close
     os._exit(0)
 
 

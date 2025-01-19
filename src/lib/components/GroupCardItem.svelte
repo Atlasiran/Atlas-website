@@ -21,7 +21,13 @@
     import { authStore } from "$lib/stores/authStore";
     const dispatch = createEventDispatcher();
 
+    export let headerBg = "";
     export let id = "";
+    export let title = "";
+    export let created_at = "";
+    export let deleted_at = "";
+    export let updated_at = "";
+    export let delete_reason = "";
     export let logo = "";
     export let name_fa = "";
     export let name_en = "";
@@ -36,6 +42,7 @@
     export let social_x;
     export let social_instagram;
     export let social_telegram;
+    export let social_youtube;
     export let editable = true;
     export let markForEdit = false;
     export let org_type = "";
@@ -53,6 +60,7 @@
     export let social_facebook = null;
     export let plan = "";
     export let shortDescription = "";
+    export let mark_for_delete = "";
     let name;
 
     export let loading = false;
