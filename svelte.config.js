@@ -1,65 +1,54 @@
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-
-// cloudflare 
-import adapter from '@sveltejs/adapter-cloudflare';
+import cloudflareAdapter from '@sveltejs/adapter-cloudflare';
+import staticAdapter from '@sveltejs/adapter-static';
 
 import { mdsvex } from 'mdsvex';
 import mdsvexConfig from './mdsvex.config.js';
 import { getAllOPPaths } from './src/lib/server_utils.js';
 
+const useStatic = process.env.ADAPTER === 'static';
+const dev = process.env.NODE_ENV === 'development';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: [
-		'.svelte',
-		...mdsvexConfig.extensions
-	],
+  extensions: ['.svelte', ...mdsvexConfig.extensions],
 
-	preprocess: [
-		mdsvex(mdsvexConfig),
-		vitePreprocess(),
-	],
+  preprocess: [mdsvex(mdsvexConfig), vitePreprocess()],
 
-	kit: {
-		// --------------------------------------------------- static
-		// adapter: adapter({
-		// 	fallback: 'index.html'
-		// }),
+  kit: {
+    adapter: useStatic
+      ? staticAdapter({
+          pages: 'build',
+          assets: 'build',
+          fallback: 'index.html'
+        })
+      : cloudflareAdapter({
+          routes: {
+            include: ['/*'],
+            exclude: ['<all>']
+          },
+          platformProxy: {
+            configPath: 'wrangler.toml',
+            environment: undefined,
+            experimentalJsonConfig: false,
+            persist: false
+          }
+        }),
 
-		// --------------------------------------------------- cloudflare 
-		adapter: adapter({
-			// See below for an explanation of these options
-			routes: {
-				include: [
-					'/*'
-				],
-				exclude: [
-					'<all>'
-				]
-			},
-			platformProxy: {
-				configPath: 'wrangler.toml',
-				environment: undefined,
-				experimentalJsonConfig: false,
-				persist: false
-			}
-		}),
+    alias: {
+      '@/*': './src/lib/*'
+    },
 
-		alias: {
-			"@/*": "./src/lib/*",
-		},
+    paths: {
+      base: useStatic && !dev ? '/Atlas-website' : ''
+    },
 
-		prerender: {
-			entries: [
-				'*',
-				'/api/pages/page/*',
-				'/api/posts/page/*',
-				...getAllOPPaths()
-			]
-		},
-		csp: { mode: 'auto' }
+    prerender: {
+      entries: ['*', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths()]
+    },
 
-	},
-
+    csp: { mode: 'auto' }
+  }
 };
 
 export default config;
