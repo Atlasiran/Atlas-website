@@ -12,6 +12,7 @@
     import ListAllGroups from "@/components/ListAllGroups.svelte";
     import Header from "@/components/layout/Header.svelte";
     import Hash from "lucide-svelte/icons/hash";
+    import { base } from "$app/paths";
 
     let data = [];
 
@@ -21,7 +22,7 @@
     ];
 
     onMount(() => {
-        fetch("/data/political_parties.json")
+        fetch(`${base}/data/political_parties.json`)
             .then((response) => response.json())
             .then((json) => {
                 data = json;

@@ -16,6 +16,7 @@
     import CreateNewModal from "@/components/CreateNewModal.svelte"; // Import CreateNewModal
     import { authStore } from "$lib/stores/authStore";
     import { getEntities, fixNamesInDB, deleteEntity } from "$lib/api";
+    import { base } from "$app/paths";
 
     let data = [];
     let editOpen = false;
@@ -98,7 +99,7 @@
         }
 
         if (!isAuth) {
-            fetch("/data/data.json")
+            fetch(`${base}/data/data.json`)
                 .then((response) => response.json())
                 .then((json) => {
                     data = json;

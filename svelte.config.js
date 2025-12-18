@@ -44,7 +44,7 @@ const config = {
     },
 
     prerender: {
-      entries: ['*', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths()]
+      entries: ['*', '/parties', '/groups', '/graph', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths()]
     },
 
     csp: { mode: 'auto' }

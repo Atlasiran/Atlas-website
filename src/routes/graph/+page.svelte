@@ -8,6 +8,7 @@
     import ForceAtlas2 from "graphology-layout-forceatlas2";
     import { Play } from "lucide-svelte";
     import ShowNodeBar from "@/components/ShowNodeBar.svelte";
+    import { base } from "$app/paths";
 
     let container: HTMLElement;
     let renderer: Sigma;
@@ -226,7 +227,7 @@
     }
 
     onMount(async () => {
-        const res = await fetch("/test.gexf");
+        const res = await fetch(`${base}/test.gexf`);
         const gexf = await res.text();
         await drawGraph(gexf);
     });
