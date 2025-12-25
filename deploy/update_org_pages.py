@@ -5,8 +5,9 @@ import re
 
 this_file_path = os.path.abspath(__file__)
 this_dir_path = os.path.dirname(this_file_path)
-json_file_path = os.path.join(this_dir_path, "..", "static", "data", "data.json")
-output_dir = os.path.join(this_dir_path, "..", "src","content","org-pages")
+json_file_path = os.path.join(
+    this_dir_path, "..", "static", "data", "data.json")
+output_dir = os.path.join(this_dir_path, "..", "src", "content", "org-pages")
 
 
 def log(message):
@@ -37,7 +38,7 @@ expertise: "{_(entry.get('expertise', ''))}"
 history: "{_(entry.get('history', ''))}"
 manifest: "{_(entry.get('manifest', ''))}"
 coc: "{_(entry.get('coc', ''))}"
-estimation_of_members: "{_(entry.get('estimation_of_members', ''))}"
+estimationOfMembers: "{_(entry.get('estimationOfMembers', ''))}"
 political_orientation: "{_(entry.get('political_orientation', ''))}"
 markForEdit: "{_(entry.get('markForEdit', ''))}"
 social_telegram: "{_(entry.get('social_telegram', ''))}"
@@ -89,7 +90,8 @@ def mapIDtoFileName(output_dir):
         ]
 
         if len(delimiter_positions) >= 2:
-            section_content = content[delimiter_positions[0] : delimiter_positions[1]]
+            section_content = content[delimiter_positions[0]
+                : delimiter_positions[1]]
             id_pattern = re.compile(r'id:\s*"(.*?)"')
             match = id_pattern.search(section_content)
             if match:
