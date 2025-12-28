@@ -18,6 +18,7 @@
     import ArrowUpRight from "lucide-svelte/icons/arrow-up-right";
     import Loading from "@/components/ui/loading/Loading.svelte";
     import { goto } from "$app/navigation";
+    import { base } from "$app/paths";
     import { authStore } from "$lib/stores/authStore";
     const dispatch = createEventDispatcher();
 
@@ -75,7 +76,7 @@
         if (!pageLink){
             return;
         }
-        goto(pageLink);
+        goto(`${base}${pageLink}`);
     }
 
     function gotoPage(link) {
