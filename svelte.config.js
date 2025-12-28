@@ -20,7 +20,7 @@ const config = {
       ? staticAdapter({
           pages: 'build',
           assets: 'build',
-          fallback: 'index.html'
+          fallback: '404.html'
         })
       : cloudflareAdapter({
           routes: {
@@ -44,7 +44,8 @@ const config = {
     },
 
     prerender: {
-      entries: ['*', '/parties', '/groups', '/graph', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths()]
+      entries: ['*', '/parties', '/groups', '/graph', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths()],
+      handleHttpError: 'warn'
     },
 
     csp: { mode: 'auto' }

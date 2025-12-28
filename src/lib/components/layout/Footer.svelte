@@ -8,6 +8,7 @@
     } from "../../../content/configs";
     import AuthButton from "$lib/components/AuthButton.svelte";
     import Github from "lucide-svelte/icons/github";
+    import { base } from "$app/paths";
 
     export let haederLinks = defaultHeaderLinks;
     export let _socialLinks = socialLinks;
@@ -21,7 +22,7 @@
         <div class="inline-flex items-center flex-col gap-4">
             <Globe class="w-16 h-16 text-indigo-300 " />
             <h1 class="font-extralight text-3xl">
-                <a href="/">
+                <a href="{base}">
                     {siteTitle}
                 </a>
             </h1>
@@ -30,7 +31,7 @@
         <div class="inline-flex flex-row flex-wrap justify-center my-8 gap-5">
             {#each haederLinks as { name, link }, idx (idx)}
                 <a
-                    href={link}
+                    href="{base}{link}"
                     class:active-link={$page.url.pathname === link}
                     class:not-active-link={$page.url.pathname !== link}
                     class="text-sm"

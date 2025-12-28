@@ -9,6 +9,7 @@
     import { defaultHeaderLinks, siteTitle } from "../../../content/configs";
     import Logo from "$lib/icons/Logo.svelte";
     import AuthButton from "$lib/components/AuthButton.svelte";
+    import { base } from "$app/paths";
 
     export let haederLinks = defaultHeaderLinks;
     export let style = 2;
@@ -35,7 +36,7 @@
             class="container flex-grow flex flex-col mr-auto justify-center items-center gap-4"
         >
             <Globe class="w-[200px] h-[200px] text-indigo-300 " />
-            <a href="/">
+            <a href="{base}">
                 <h1 class="font-extralight text-4xl text-gray-600">
                     {siteTitle}
                 </h1>
@@ -46,7 +47,7 @@
             <div class="flex flex-row justify-start gap-5">
                 {#each haederLinks as { name, link }, idx (idx)}
                     <a
-                        href={link}
+                        href="{base}{link}"
                         class:active-link={$page.url.pathname === link}
                         class:not-active-link={$page.url.pathname !== link}
                         class="my-4 text-lg"
@@ -71,7 +72,7 @@
         <div class="inline-flex flex-row justify-start gap-5">
             {#each haederLinks as { name, link }, idx (idx)}
                 <a
-                    href={link}
+                    href="{base}{link}"
                     class:active-link={$page.url.pathname === link}
                     class:not-active-link={$page.url.pathname !== link}
                     class="my-4 text-sm"
@@ -92,7 +93,7 @@
                     <Logo />
                 </div>
                 <h1 class="font-extralight text-md">
-                    <a href="/">
+                    <a href="{base}">
                         {siteTitle}
                     </a>
                 </h1>
@@ -111,7 +112,7 @@
                             >
                                 {#each haederLinks as { name, link }, idx (idx)}
                                     <SheetClose>
-                                        <a href={link} class="text-md">
+                                        <a href="{base}{link}" class="text-md">
                                             {name}
                                         </a>
                                     </SheetClose>
@@ -129,7 +130,7 @@
             <div class="hidden lg:inline-flex flex-row justify-start gap-5">
                 {#each haederLinks as { name, link }, idx (idx)}
                     <a
-                        href={link}
+                        href="{base}{link}"
                         class:active-link={$page.url.pathname === link}
                         class:not-active-link={$page.url.pathname !== link}
                         class="my-4 text-sm"

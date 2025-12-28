@@ -16,6 +16,7 @@
     import Logo from "$lib/icons/Logo.svelte";
     import Handshake from "lucide-svelte/icons/handshake";
     import ChartNetwork from "lucide-svelte/icons/chart-network";
+    import { base } from "$app/paths";
 
     let data = [];
 
@@ -73,7 +74,7 @@
 
         <div class="py-32 flex flex-col justify-center gap-32 items-center justify-between">
             <div class="flex flex-row flex-wrap gap-8 justify-center">
-            <a href="/groups">
+            <a href="{base}/groups">
                 <Card.Root
                 class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
@@ -83,7 +84,7 @@
                 </Card.Root>
             </a>
 
-            <a href="/parties">
+            <a href="{base}/parties">
                 <Card.Root
                 class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"

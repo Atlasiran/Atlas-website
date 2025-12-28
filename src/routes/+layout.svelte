@@ -11,6 +11,7 @@
     import { siteTitle, siteName, siteDescription } from "../content/configs";
     import { Toaster } from "$lib/components/ui/sonner";
     import { toast } from "svelte-sonner";
+    import { base, assets } from "$app/paths";
 
     import "../app.css";
     export let data = {};
@@ -70,7 +71,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@Atlasworker" />
     <meta name="twitter:creator" content="@Atlasworker" />
-    <meta property="og:image" content="/twitter_banner.png" />
+    <meta property="og:image" content="{assets}/twitter_banner.png" />
 </svlete:head>
 <Toaster />
 
