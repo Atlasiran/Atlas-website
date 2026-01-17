@@ -20,7 +20,8 @@
         { title: "دارای تلگرام", value: "social_telegram" },
         { title: "دارای x", value: "social_x" },
         { title: "دارای وبسایت", value: "internetAddress" },
-        { title: "دارای مرامنامه", value: "manifest" },
+        { title: "دارای مرامنامه", value: "codeOfConduct" },
+        { title: "دارای منیفست", value: "manifest" },
         { title: "دارای چارت سازمانی", value: "constitution" },
     ];
     let selectedFilter = [];
@@ -93,7 +94,8 @@
                     item?.name_fa?.toLowerCase().includes(lowerCaseSearch) ||
                     item?.name_en?.toLowerCase().includes(lowerCaseSearch) ||
                     item?.about?.toLowerCase().includes(lowerCaseSearch) ||
-                    item?.manifest?.toLowerCase().includes(lowerCaseSearch)
+                    item?.manifest?.toLowerCase().includes(lowerCaseSearch) ||  
+                    item?.codeOfConduct?.toLowerCase().includes(lowerCaseSearch)
                 );
             });
         }
