@@ -1,22 +1,11 @@
-<script>   
-    import Button from "@/components/ui/button/button.svelte";
-    import { onMount } from "svelte";
-    import * as Card from "$lib/components/ui/card/index.js";
-    import Link from "lucide-svelte/icons/link";
-    import Scale from "lucide-svelte/icons/scale";
-    import ScrollText from "lucide-svelte/icons/scroll-text";
-    import Fullscreen from "lucide-svelte/icons/fullscreen";
-    import MapPin from "lucide-svelte/icons/map-pin";
-    import Users from "lucide-svelte/icons/users";
-    import * as Tooltip from "$lib/components/ui/tooltip/index.js";
-    import ListAllGroups from "@/components/ListAllGroups.svelte";
-    import Header from "@/components/layout/Header.svelte";
-    import Hash from "lucide-svelte/icons/hash";
-    import Globe from "lucide-svelte/icons/globe";
-    import Logo from "$lib/icons/Logo.svelte";
-    import Handshake from "lucide-svelte/icons/handshake";
-    import ChartNetwork from "lucide-svelte/icons/chart-network";
+<script>
     import { base } from "$app/paths";
+    import * as Card from "$lib/components/ui/card/index.js";
+    import Logo from "$lib/icons/Logo.svelte";
+    import ChartNetwork from "lucide-svelte/icons/chart-network";
+    import Handshake from "lucide-svelte/icons/handshake";
+    import Users from "lucide-svelte/icons/users";
+    import { onMount } from "svelte";
 
     let data = [];
 
@@ -46,65 +35,80 @@
             </h2>
             <p class="w-96 text-gray-600 flex-grow">
                 <br />
-                اطلس جامعه مدنی ایرانیان پروژه‌ای است که با هدف توانمندسازی سازمان‌های مدنی ایران از راه همکاری هدایت می‌شود. اطلس با هدف ایجاد یک جبهه‌ی متحد برای <a href="جنبش">جنبش زن، زندگی، آزادی</a> میان سازمان‌های ایرانیان پل می‌زند.
+                اطلس جامعه مدنی ایرانیان پروژه‌ای است که با هدف توانمندسازی سازمان‌های
+                مدنی ایران از راه همکاری هدایت می‌شود. اطلس با هدف ایجاد یک جبهه‌ی
+                متحد برای <a href="جنبش">جنبش زن، زندگی، آزادی</a> میان
+                سازمان‌های ایرانیان پل می‌زند.
                 <br />
                 <br />
                 <strong>هدف‌ها</strong>
-               
+
                 <br />
                 <br />
-                <strong>درک مسیر جنبش:</strong> ما تاریخچه‌ی توسعه‌ی جنبش را بررسی می‌کنیم و نقاط عطف و چالش‌های آن را شناسایی می‌کنیم.
+                <strong>درک مسیر جنبش:</strong> ما تاریخچه‌ی توسعه‌ی جنبش را
+                بررسی می‌کنیم و نقاط عطف و چالش‌های آن را شناسایی می‌کنیم.
                 <br />
                 <br />
-                <strong>نقشه برداری از شبکه‌ی ارتباطات:</strong> ما ساختارهای موجود در جنبش را تحلیل می‌کنیم تا نقاط قوت، ضعف و فرصت‌های همکاری را شناسایی کنیم.
+                <strong>نقشه برداری از شبکه‌ی ارتباطات:</strong> ما ساختارهای
+                موجود در جنبش را تحلیل می‌کنیم تا نقاط قوت، ضعف و فرصت‌های
+                همکاری را شناسایی کنیم.
                 <br />
                 <br />
-                <strong>تعمیق درک:</strong> ما با انجام مطالعات عمیق، درک دقیق‌تری از دینامیک و نیازهای جنبش به دست می‌آوریم.
+                <strong>تعمیق درک:</strong> ما با انجام مطالعات عمیق، درک
+                دقیق‌تری از دینامیک و نیازهای جنبش به دست می‌آوریم.
                 <br />
                 <br />
-                <strong>ارزیابی منابع:</strong> ما منابع کیفی و کمی در دسترس جنبش را با هدف برنامه‌ریزی استراتژیک بررسی می‌کنیم.
+                <strong>ارزیابی منابع:</strong> ما منابع کیفی و کمی در دسترس
+                جنبش را با هدف برنامه‌ریزی استراتژیک بررسی می‌کنیم.
                 <br />
                 <br />
-                <strong>اندازه‌گیری تاثیر:</strong> ما پیشرفت‌ها و عقب‌گردها را پیگیری می‌کنیم تا استراتژی‌ها را به طور مداوم اصلاح کنیم و اثربخشی تلاش‌های مشترک را اندازه‌گیری کنیم.
+                <strong>اندازه‌گیری تاثیر:</strong> ما پیشرفت‌ها و عقب‌گردها را
+                پیگیری می‌کنیم تا استراتژی‌ها را به طور مداوم اصلاح کنیم و
+                اثربخشی تلاش‌های مشترک را اندازه‌گیری کنیم.
                 <br />
                 <br />
-                <strong>اطلاع‌رسانی برای آینده:</strong> ما برای جمع‌آوری بازخورد از شرکت‌کنندگان در جنبش، و شکل‌دهی ابتکارات آینده، نظرسنجی انجام می‌دهیم.
+                <strong>اطلاع‌رسانی برای آینده:</strong> ما برای جمع‌آوری بازخورد
+                از شرکت‌کنندگان در جنبش، و شکل‌دهی ابتکارات آینده، نظرسنجی انجام
+                می‌دهیم.
             </p>
         </div>
 
-        <div class="py-32 flex flex-col justify-center gap-32 items-center justify-between">
+        <div
+            class="py-32 flex flex-col justify-center gap-32 items-center justify-between"
+        >
             <div class="flex flex-row flex-wrap gap-8 justify-center">
-            <a href="{base}/groups">
-                <Card.Root
-                class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
+                <a href="{base}/groups">
+                    <Card.Root
+                        class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
-                >
-                <Users class="h-20 w-20 " />
-                <span class="text-3xl"> گروه ها </span>
-                </Card.Root>
-            </a>
+                    >
+                        <Users class="h-20 w-20 " />
+                        <span class="text-3xl"> گروه ها </span>
+                    </Card.Root>
+                </a>
 
-            <a href="{base}/parties">
-                <Card.Root
-                class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
+                <a href="{base}/parties">
+                    <Card.Root
+                        class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
-                >
-                <Handshake class="h-20 w-20 " />
-                <span class="text-3xl text-center">احزاب و سازمان‌های سیاسی</span>
-                </Card.Root>
-            </a>
+                    >
+                        <Handshake class="h-20 w-20 " />
+                        <span class="text-3xl text-center"
+                            >احزاب و سازمان‌های سیاسی</span
+                        >
+                    </Card.Root>
+                </a>
 
-            <a href="/graph">
-                <Card.Root
-                class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
+                <a href="/graph">
+                    <Card.Root
+                        class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
-                >
-                <ChartNetwork class="h-20 w-20 " />
-                <span class="text-3xl"> گراف</span>
-                </Card.Root>
-            </a>
+                    >
+                        <ChartNetwork class="h-20 w-20 " />
+                        <span class="text-3xl"> گراف</span>
+                    </Card.Root>
+                </a>
             </div>
-
         </div>
 
         <div class="card-2">
@@ -112,12 +116,17 @@
                 چگونه همکاری کنیم؟
             </h2>
             <p class="w-96 text-gray-600 flex-grow">
-                پروژه اطلس بر همکاری استوار است. اگر شما نیز به توانمندسازی جنبش زن، زندگی، آزادی علاقه دارید، شما را به همکاری دعوت می‌کنیم. شما می‌توانید:
+                پروژه اطلس بر همکاری استوار است. اگر شما نیز به توانمندسازی جنبش
+                زن، زندگی، آزادی علاقه دارید، شما را به همکاری دعوت می‌کنیم. شما
+                می‌توانید:
                 <br />
                 <br />
                 - آخرین اخبار پروژه را در این وبسایت دنبال کنید.<br />
                 - دانش خود را به اشتراک بگذارید.<br />
-                - با ما <a href="mailto:hi@atlasiran.org" class="underline">تماس بگیرید</a>.<br />
+                - با ما
+                <a href="mailto:hi@atlasiran.org" class="underline"
+                    >تماس بگیرید</a
+                >.<br />
             </p>
         </div>
     </section>
