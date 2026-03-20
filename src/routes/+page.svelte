@@ -99,7 +99,7 @@
                     </Card.Root>
                 </a>
 
-                <a href="/graph">
+                <a href="https://atlasiran.github.io/Atlas-website/graph">
                     <Card.Root
                         class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
