@@ -94,7 +94,7 @@
                 </Card.Root>
             </a>
 
-            <a href="https://graphcommons.com/graphs/7cac498a-d3a1-4a8f-b993-e8c8bdf13ae7">
+            <a href="/graph">
                 <Card.Root
                 class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
                 hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
