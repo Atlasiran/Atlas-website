@@ -1,5 +1,4 @@
 <script>
-    import Contact from "lucide-svelte/icons/contact";
     export let title;
     export let created_at;
     export let updated_at;
@@ -25,16 +24,15 @@
     export let social_youtube;
     export let social_x;
     export let social_instagram;
-    export let headerBg = "background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%)";
+    export let headerBg =
+        "background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%)";
 </script>
 
-<div class="w-full bg-white h-64 p-8 shadow-sm"
-        style="{headerBg}">
-</div>
+<div class="w-full bg-white h-64 p-8 shadow-sm" style={headerBg}></div>
 
 <div class="w-full mx-auto max-w-[800px] relative">
     <div
-        class="w-16 h-16 bg-white rounded-md border top-[-40px] absolute p-2 text-gray-700  md:right-0 right-8"
+        class="w-16 h-16 bg-white rounded-md border top-[-40px] absolute p-2 text-gray-700 md:right-0 right-8"
     >
         <slot name="page-logo" />
     </div>
@@ -54,76 +52,83 @@
             <b>نام فارسی:</b>
             <span>{name_fa}</span>
         </div>
-        <div> 
+        <div>
             <b>نوع نهاد:</b>
             <span>{org_type}</span>
         </div>
         <div>
             <b>نشانی روی اطلس:</b>
-            <a href={`https://atlasiran.org${pageLink}`} class="text-blue-500" dir="ltr">{`https://atlasiran.org${pageLink}`}</a>
+            <a
+                href={`https://atlasiran.github.io/Atlas-website/${pageLink}`}
+                class="text-blue-500"
+                dir="ltr"
+                >{`https://atlasiran.github.io/Atlas-website/${pageLink}`}</a
+            >
         </div>
         <div>
             <b>نام لاتین:</b>
-            <span>{name_en}</span> 
+            <span>{name_en}</span>
         </div>
         <div>
             <b>نام کوتاه:</b>
-            <span>{name_short}</span>  
+            <span>{name_short}</span>
         </div>
         <div>
             <b>مکان:</b>
-            <span>{location}</span>   
+            <span>{location}</span>
         </div>
         <div>
             <b>نشانی پستی:</b>
-            <span>{post_location}</span>   
+            <span>{post_location}</span>
         </div>
         <div>
             <b>نشانی وب‌سایت:</b>
-            <a href={internetAddress} class="text-blue-500" dir="ltr">{internetAddress}</a>
+            <a href={internetAddress} class="text-blue-500" dir="ltr"
+                >{internetAddress}</a
+            >
         </div>
         <div>
             <b>ایمیل:</b>
-            <span>{email}</span>   
+            <span>{email}</span>
         </div>
         <div>
             <b>تلفن:</b>
-            <span>{phone}</span>   
+            <span>{phone}</span>
             <div>
                 <b>تخصص‌ها:</b>
-                <span>{expertise}</span>   
+                <span>{expertise}</span>
             </div>
             <div>
                 <b>تاریخ‌چه:</b>
-                <span>{history}</span> 
+                <span>{history}</span>
             </div>
             <div>
                 <b>منیفست:</b>
-                <span>{manifest}</span>   
+                <span>{manifest}</span>
             </div>
             <div>
                 <b>مرام‌نامه:</b>
-                <span>{coc}</span> 
+                <span>{coc}</span>
             </div>
             <div>
                 <b>تعداد تخمینی اعضا:</b>
-                <span>{estimation_of_members}</span>   
+                <span>{estimation_of_members}</span>
             </div>
             <div>
                 <b>گرایش سیاسی:</b>
-                <span>{political_orientation}</span>   
+                <span>{political_orientation}</span>
             </div>
             <div>
                 <b>نشانی تلگرام:</b>
-                <span>{social_telegram}</span> 
+                <span>{social_telegram}</span>
             </div>
             <div>
                 <b>نشانی فیس‌بوک:</b>
-                <span>{social_facebook}</span> 
+                <span>{social_facebook}</span>
             </div>
             <div>
                 <b>نشانی یوتیوب:</b>
-                <span>{social_youtube}</span>  
+                <span>{social_youtube}</span>
             </div>
             <div>
                 <b>نشانی توییتر:</b>
@@ -135,10 +140,11 @@
             </div>
             <div>
                 <b>درباره:</b>
-                <span>{about}</span>   
-            </div>
+                <span>{about}</span>
             </div>
         </div>
     </div>
-    <style>
-    </style>
+</div>
+
+<style>
+</style>
