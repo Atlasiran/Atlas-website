@@ -128,7 +128,7 @@
                 <span class="step-num">۳</span>
                 <p>
                     با ما
-                    <a href="mailto:atlas@transcf.org" class="collab-link">تماس بگیرید</a>.
+                    <a href="mailto:hi@atlasiran.org" class="collab-link">تماس بگیرید</a>.
                 </p>
             </div>
         </div>
