@@ -4,7 +4,6 @@ backend:
   branch: main
   auth_type: pkce
   app_id: Ov23lixuXICVvk5XiKbI
-  base_url: https://atlasiran.org
 
 # Where uploaded logos are stored and served from
 media_folder: "static/logos"
