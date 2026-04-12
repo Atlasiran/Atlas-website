@@ -2,8 +2,7 @@ backend:
   name: github
   repo: Atlasiran/Atlas-website
   branch: main
-  auth_type: pkce
-  app_id: Ov23lixuXICVvk5XiKbI
+  base_url: https://atlasiran-auth.atorkzaban.workers.dev
 
 # Where uploaded logos are stored and served from
 media_folder: "static/logos"
@@ -40,7 +39,7 @@ collections:
           - { label: "Project (پروژه)", value: "پروژه" }
           - { label: "Various (گوناگون)", value: "گوناگون" }
           - { label: "Closed Political Org (سازمان سیاسی - بسته شده)", value: "سازمان سیاسی - بسته شده" }
-      - { label: "Logo", name: "logo", widget: "image", required: false, allow_multiple: false, default: "logos/temporary.png" }
+      - { label: "Logo", name: "logo", widget: "image", required: false, multiple: false, default: "logos/temporary.png" }
       - { label: "Persian Name (نام فارسی)", name: "name_fa", widget: "string", required: false }
       - { label: "Latin Name (نام لاتین)", name: "name_en", widget: "string", required: false }
       - { label: "Short Name (نام کوتاه)", name: "name_short", widget: "string", required: false }
