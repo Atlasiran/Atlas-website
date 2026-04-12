@@ -1,167 +1,357 @@
 <script>
     import { base } from "$app/paths";
-    import * as Card from "$lib/components/ui/card/index.js";
     import Logo from "$lib/icons/Logo.svelte";
     import ChartNetwork from "lucide-svelte/icons/chart-network";
     import Handshake from "lucide-svelte/icons/handshake";
     import Users from "lucide-svelte/icons/users";
+    import ArrowLeft from "lucide-svelte/icons/arrow-left";
     import { onMount } from "svelte";
 
-    let data = [];
-
-    onMount(() => {});
+    const goals = [
+        { title: "درک مسیر جنبش", desc: "تاریخچه‌ی توسعه‌ی جنبش را بررسی می‌کنیم و نقاط عطف و چالش‌های آن را شناسایی می‌کنیم." },
+        { title: "نقشه‌برداری شبکه‌ی ارتباطات", desc: "ساختارهای موجود در جنبش را تحلیل می‌کنیم تا نقاط قوت، ضعف و فرصت‌های همکاری را شناسایی کنیم." },
+        { title: "تعمیق درک", desc: "با انجام مطالعات عمیق، درک دقیق‌تری از دینامیک و نیازهای جنبش به دست می‌آوریم." },
+        { title: "ارزیابی منابع", desc: "منابع کیفی و کمی در دسترس جنبش را با هدف برنامه‌ریزی استراتژیک بررسی می‌کنیم." },
+        { title: "اندازه‌گیری تاثیر", desc: "پیشرفت‌ها و عقب‌گردها را پیگیری می‌کنیم تا استراتژی‌ها را به طور مداوم اصلاح کنیم." },
+        { title: "اطلاع‌رسانی برای آینده", desc: "برای جمع‌آوری بازخورد از شرکت‌کنندگان در جنبش و شکل‌دهی ابتکارات آینده، نظرسنجی انجام می‌دهیم." },
+    ];
 </script>
 
 <svelte:head>
     <title>اطلس جامعه مدنی ایران - صفحه‌ی اصلی</title>
 </svelte:head>
 
-<div class="container mx-auto">
-    <section
-        class="flex flex-col justify-center items-center gap-8 dot-background"
-    >
-        <div class="w-[200px] h-[200px]">
+<!-- ═══ HERO ═══ -->
+<section class="hero dot-background">
+    <div class="max-w-3xl mx-auto px-6 flex flex-col items-center text-center gap-8">
+        <div class="section-badge">
+            <span class="badge-pulse"></span>
+            پروژه‌ی نقشه‌برداری جامعه مدنی
+        </div>
+
+        <div class="w-20 h-20 hero-logo">
             <Logo />
         </div>
-        <h1 class="text-3xl sm:text-5xl text-gray-600">
-            اطلس جامعه مدنی ایران
-        </h1>
-    </section>
 
-    <section class="p-2 sm:p-8 flex flex-col gap-16">
-        <div class="card">
-            <h2 class="text-4xl font-extralight text-center flex-grow">
-                اطلس جامعه مدنی ایران چیست؟
-            </h2>
-            <p class="w-96 text-gray-600 flex-grow">
-                <br />
-                اطلس جامعه مدنی ایرانیان پروژه‌ای است که با هدف توانمندسازی سازمان‌های
-                مدنی ایران از راه همکاری هدایت می‌شود. اطلس با هدف ایجاد یک جبهه‌ی
-                متحد برای جنبش‌های آزادی‌خواه میان
-                سازمان‌های ایرانیان پل می‌زند.
-                <br />
-                <br />
-                <strong>هدف‌ها</strong>
+        <h1 class="hero-h1">اطلس جامعه مدنی ایران</h1>
 
-                <br />
-                <br />
-                <strong>درک مسیر جنبش:</strong> ما تاریخچه‌ی توسعه‌ی جنبش را
-                بررسی می‌کنیم و نقاط عطف و چالش‌های آن را شناسایی می‌کنیم.
-                <br />
-                <br />
-                <strong>نقشه برداری از شبکه‌ی ارتباطات:</strong> ما ساختارهای
-                موجود در جنبش را تحلیل می‌کنیم تا نقاط قوت، ضعف و فرصت‌های
-                همکاری را شناسایی کنیم.
-                <br />
-                <br />
-                <strong>تعمیق درک:</strong> ما با انجام مطالعات عمیق، درک
-                دقیق‌تری از دینامیک و نیازهای جنبش به دست می‌آوریم.
-                <br />
-                <br />
-                <strong>ارزیابی منابع:</strong> ما منابع کیفی و کمی در دسترس
-                جنبش را با هدف برنامه‌ریزی استراتژیک بررسی می‌کنیم.
-                <br />
-                <br />
-                <strong>اندازه‌گیری تاثیر:</strong> ما پیشرفت‌ها و عقب‌گردها را
-                پیگیری می‌کنیم تا استراتژی‌ها را به طور مداوم اصلاح کنیم و
-                اثربخشی تلاش‌های مشترک را اندازه‌گیری کنیم.
-                <br />
-                <br />
-                <strong>اطلاع‌رسانی برای آینده:</strong> ما برای جمع‌آوری بازخورد
-                از شرکت‌کنندگان در جنبش، و شکل‌دهی ابتکارات آینده، نظرسنجی انجام
-                می‌دهیم.
-            </p>
+        <p class="hero-sub">
+            نقشه‌برداری، تحلیل و توانمندسازی شبکه‌ی جنبش‌های آزادی‌خواه ایران
+        </p>
+
+        <div class="flex flex-row flex-wrap gap-3 justify-center">
+            <a href="{base}/groups" class="btn-primary">کاوش گروه‌ها</a>
+            <a href="{base}/p/about-us" class="btn-outline">درباره اطلس</a>
         </div>
+    </div>
+</section>
 
-        <div
-            class="py-32 flex flex-col justify-center gap-32 items-center justify-between"
-        >
-            <div class="flex flex-row flex-wrap gap-8 justify-center">
-                <a href="{base}/groups">
-                    <Card.Root
-                        class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
-                hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
-                    >
-                        <Users class="h-20 w-20 " />
-                        <span class="text-3xl"> گروه ها </span>
-                    </Card.Root>
-                </a>
-
-                <a href="{base}/parties">
-                    <Card.Root
-                        class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
-                hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
-                    >
-                        <Handshake class="h-20 w-20 " />
-                        <span class="text-3xl text-center"
-                            >احزاب و سازمان‌های سیاسی</span
-                        >
-                    </Card.Root>
-                </a>
-
-                <a href="https://atlasiran.github.io/Atlas-website/graph">
-                    <Card.Root
-                        class="w-[200px] h-[200px] flex flex-col justify-center items-center gap-4
-                hover:border-yellow-600 transition-colors text-gray-700 hover:text-yellow-600"
-                    >
-                        <ChartNetwork class="h-20 w-20 " />
-                        <span class="text-3xl"> گراف</span>
-                    </Card.Root>
-                </a>
+<!-- ═══ QUICK NAV CARDS ═══ -->
+<div class="nav-cards-strip border-t border-b" style="border-color: var(--atlas-navy-06)">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3">
+        <a href="{base}/groups" class="nav-strip-card">
+            <Users class="nav-strip-icon" />
+            <div>
+                <div class="nav-strip-title">گروه‌ها</div>
+                <p class="nav-strip-desc">سازمان‌های مدنی و اجتماعی</p>
             </div>
-        </div>
+            <ArrowLeft class="nav-strip-arrow" />
+        </a>
 
-        <div class="card-2">
-            <h2 class="text-2xl font-extralight text-center flex-grow">
-                چگونه همکاری کنیم؟
-            </h2>
-            <p class="w-96 text-gray-600 flex-grow">
-                پروژه اطلس بر همکاری استوار است. اگر شما نیز به توانمندسازی جنبش‌های آزادی‌خواهی ایران
-                علاقه دارید، شما را به همکاری دعوت می‌کنیم. شما
-                می‌توانید:
-                <br />
-                <br />
-                - آخرین اخبار پروژه را در این وبسایت دنبال کنید.<br />
-                - دانش خود را به اشتراک بگذارید.<br />
-                - با ما
-                <a href="mailto:atlas@transcf.org" class="underline"
-                    >تماس بگیرید</a
-                >.<br />
-            </p>
-        </div>
-    </section>
+        <a href="{base}/parties" class="nav-strip-card border-y sm:border-y-0 sm:border-x" style="border-color: var(--atlas-navy-06)">
+            <Handshake class="nav-strip-icon" />
+            <div>
+                <div class="nav-strip-title">احزاب و سازمان‌های سیاسی</div>
+                <p class="nav-strip-desc">طیف سیاسی ایران</p>
+            </div>
+            <ArrowLeft class="nav-strip-arrow" />
+        </a>
+
+        <a href="https://atlasiran.github.io/Atlas-website/graph" class="nav-strip-card">
+            <ChartNetwork class="nav-strip-icon" />
+            <div>
+                <div class="nav-strip-title">گراف ارتباطات</div>
+                <p class="nav-strip-desc">شبکه‌ی بین سازمان‌ها</p>
+            </div>
+            <ArrowLeft class="nav-strip-arrow" />
+        </a>
+    </div>
 </div>
 
+<!-- ═══ ABOUT SECTION ═══ -->
+<section class="about-section">
+    <div class="max-w-5xl mx-auto px-6 py-24 sm:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div class="flex flex-col gap-5">
+            <div class="section-label">درباره اطلس</div>
+            <h2 class="section-title">اطلس جامعه مدنی ایران چیست؟</h2>
+            <p class="section-body">
+                اطلس جامعه مدنی ایرانیان پروژه‌ای است که با هدف توانمندسازی سازمان‌های
+                مدنی ایران از راه همکاری هدایت می‌شود. اطلس با هدف ایجاد یک جبهه‌ی
+                متحد برای جنبش‌های آزادی‌خواه میان سازمان‌های ایرانیان پل می‌زند.
+            </p>
+        </div>
+
+        <!-- Goals grid -->
+        <div class="goals-grid">
+            {#each goals as { title, desc }}
+                <div class="goal-card">
+                    <div class="goal-card-title">{title}</div>
+                    <p class="goal-card-desc">{desc}</p>
+                </div>
+            {/each}
+        </div>
+    </div>
+</section>
+
+<!-- ═══ COLLABORATE SECTION ═══ -->
+<section class="collab-section border-t" style="border-color: var(--atlas-navy-06)">
+    <div class="max-w-5xl mx-auto px-6 py-24 sm:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="flex flex-col gap-5">
+            <div class="section-label">همکاری</div>
+            <h2 class="section-title">چگونه همکاری کنیم؟</h2>
+            <p class="section-body">
+                پروژه اطلس بر همکاری استوار است. اگر شما نیز به توانمندسازی جنبش‌های
+                آزادی‌خواهی ایران علاقه دارید، شما را به همکاری دعوت می‌کنیم.
+            </p>
+        </div>
+
+        <div class="collab-steps">
+            <div class="collab-step">
+                <span class="step-num">۱</span>
+                <p>آخرین اخبار پروژه را در این وبسایت دنبال کنید.</p>
+            </div>
+            <div class="collab-step">
+                <span class="step-num">۲</span>
+                <p>دانش خود را به اشتراک بگذارید.</p>
+            </div>
+            <div class="collab-step last">
+                <span class="step-num">۳</span>
+                <p>
+                    با ما
+                    <a href="mailto:atlas@transcf.org" class="collab-link">تماس بگیرید</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <style>
-    .card {
-        @apply w-full text-justify  bg-gradient-to-tr from-gray-50 to-gray-100 px-2 sm:p-8 rounded-md flex flex-row flex-wrap justify-between items-center;
-        @apply border-[1px] border-gray-200;
-    }
-    .card-2 {
-        @apply w-full text-justify  bg-gradient-to-bl from-gray-50 to-gray-100 px-2 sm:p-8 rounded-md flex flex-row flex-wrap justify-between items-center;
-        @apply border-[1px] border-gray-200;
-    }
-    section {
-        min-height: calc(100vh - 50px);
+    /* ── Hero ── */
+    .hero {
+        min-height: calc(100vh - 56px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 0 60px;
     }
 
-    @keyframes wave {
-        0%,
-        100% {
-            background-position: 0 0;
-        }
-        50% {
-            background-position: 50px 50px;
-        }
+    .hero-logo {
+        opacity: 0.9;
     }
 
+    .hero-h1 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 900;
+        line-height: 1.3;
+        color: #1E3A6B;
+        letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+        font-size: 1.0625rem;
+        font-weight: 300;
+        color: rgba(30, 58, 107, 0.64);
+        max-width: 520px;
+        line-height: 2;
+    }
+
+    /* ── Hero badge ── */
+    .section-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border: 1px solid rgba(30, 58, 107, 0.12);
+        border-radius: 999px;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        color: rgba(30, 58, 107, 0.56);
+    }
+
+    .badge-pulse {
+        width: 6px;
+        height: 6px;
+        background: #0EBB90;
+        border-radius: 50%;
+        flex-shrink: 0;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+
+    /* ── Dot background ── */
     .dot-background {
-        background-image: radial-gradient(
-            circle,
-            rgba(0, 0, 0, 0.2) 1px,
-            transparent 1px
-        );
-        background-size: 20px 20px;
-        animation: wave 50s linear infinite;
+        /* inherits dot pattern from body */
+    }
+
+    /* ── Quick nav strip ── */
+    .nav-cards-strip {
+        background: #F4F6F7;
+    }
+
+    .nav-strip-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 28px 32px;
+        text-decoration: none;
+        transition: background 0.18s ease;
+        color: #1E3A6B;
+        background: #F4F6F7;
+    }
+
+    .nav-strip-card:hover {
+        background: #EDE3C7;
+    }
+
+    .nav-strip-icon {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+        opacity: 0.5;
+        color: #1E3A6B;
+    }
+
+    .nav-strip-title {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        color: #1E3A6B;
+        margin-bottom: 2px;
+    }
+
+    .nav-strip-desc {
+        font-size: 0.8125rem;
+        font-weight: 300;
+        color: rgba(30, 58, 107, 0.56);
+    }
+
+    .nav-strip-arrow {
+        width: 16px;
+        height: 16px;
+        color: rgba(30, 58, 107, 0.3);
+        margin-right: auto;
+        /* Flip for RTL: arrow points left (toward destination) */
+        transform: rotate(180deg);
+        transition: transform 0.18s ease, color 0.18s ease;
+    }
+
+    .nav-strip-card:hover .nav-strip-arrow {
+        color: #1E3A6B;
+        transform: rotate(180deg) translateX(-4px);
+    }
+
+    /* ── About section ── */
+    .about-section {
+        background: #EDE3C7;
+    }
+
+    /* ── Goals grid ── */
+    .goals-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background-color: rgba(30, 58, 107, 0.08);
+        border: 1px solid rgba(30, 58, 107, 0.08);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .goal-card {
+        background: #EDE3C7;
+        padding: 20px;
+        transition: background 0.18s ease;
+    }
+
+    .goal-card:hover {
+        background: #e4d7b3;
+    }
+
+    .goal-card-title {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #1E3A6B;
+        margin-bottom: 6px;
+    }
+
+    .goal-card-desc {
+        font-size: 0.8125rem;
+        color: rgba(30, 58, 107, 0.64);
+        line-height: 1.7;
+        font-weight: 300;
+    }
+
+    /* ── Collab section ── */
+    .collab-section {
+        background: #F4F6F7;
+    }
+
+    .collab-steps {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .collab-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid rgba(30, 58, 107, 0.06);
+        margin-bottom: 24px;
+        font-size: 0.9375rem;
+        color: rgba(30, 58, 107, 0.72);
+        font-weight: 300;
+        line-height: 1.8;
+    }
+
+    .collab-step.last {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .step-num {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(30, 58, 107, 0.12);
+        border-radius: 50%;
+        font-weight: 600;
+        font-size: 0.8125rem;
+        color: #1E3A6B;
+    }
+
+    .collab-link {
+        font-weight: 600;
+        color: #1E3A6B;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+        .goals-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .nav-strip-arrow {
+            display: none;
+        }
     }
 </style>

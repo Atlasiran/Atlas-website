@@ -171,7 +171,7 @@
         گروهی یافت نشد
     </span>
 {:else}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
         {#each _data as item, idx (idx)}
             <GroupCardItem 
                 {...item} 

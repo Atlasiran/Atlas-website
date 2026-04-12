@@ -30,7 +30,7 @@
     <LogoutModal bind:open={openLogoutModal} {onOpenChange} />
 
     <Button
-        class="text-gray-400  mt-2"
+        class="text-[rgba(30,58,107,0.56)]  mt-2"
         on:click={() => (openLogoutModal = true)}
         variant="secondary"
         size="sm"
@@ -44,7 +44,7 @@
     <LoginModal bind:open={openLoginModal} {onOpenChange} />
 
     <Button
-        class="text-gray-400 mt-2"
+        class="text-[rgba(30,58,107,0.56)] mt-2"
         on:click={() => (openLoginModal = true)}
         variant="secondary"
         size="sm"

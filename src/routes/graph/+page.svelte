@@ -270,13 +270,14 @@
     .graph-container {
         height: 100%;
         position: relative;
-        background-color: #fff;
-        background-image: radial-gradient(#cccbcb 1px, transparent 1px);
+        background-color: #F4F6F7;
+        background-image: radial-gradient(rgba(30, 58, 107, 0.12) 1px, transparent 1px);
         background-size: 20px 20px;
     }
     .sidebar {
         height: 100%;
-        background-color: #f9fafb;
+        background-color: #EDE3C7;
+        border-left: 1px solid rgba(30, 58, 107, 0.08);
     }
     .graph-view {
         width: 100vw;
@@ -297,12 +298,12 @@
 
     /* Add custom node styles */
     .graph-container .highlighted {
-        fill: #ff0000; /* red color for highlighted nodes */
-        stroke: #ff0000;
+        fill: #0EBB90;
+        stroke: #0EBB90;
     }
 
     .graph-container .highlighted-neighbor {
-        fill: #ffa500; /* orange color for highlighted neighbors */
-        stroke: #ffa500;
+        fill: #8CDAF5;
+        stroke: #8CDAF5;
     }
 </style>

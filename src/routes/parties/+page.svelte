@@ -41,10 +41,10 @@
 
 <div class="container mx-auto pt-8">
     <div class="mb-32">
-        <h1 class="text-4xl font-bold text-indigo-400 mb-4">
+        <h1 class="text-4xl font-bold text-[#1E3A6B] mb-4">
             احزاب و سازمان‌های سیاسی
         </h1>
-        <p class="text-justify text-gray-600">
+        <p class="text-justify text-[rgba(30,58,107,0.64)]">
             در این بخش می‌توانید اطلاعات مربوط به احزاب و سازمان‌های سیاسی را مشاهده کنید.
             این نهادها بر اساس مستندات عمومی جمع‌آوری شده‌اند.
             اگر اطلاعاتی در این اطلس ناقص یا نادرست است، لطفن به ما اطلاع بدهید.

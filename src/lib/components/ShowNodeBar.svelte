@@ -101,14 +101,14 @@
 
 <div class="flex-grow pt-4">
     <div class="">
-        <h1 class="text-4xl font-bold text-gray-800 p-4 pb-8">اطلاعات گره</h1>
+        <h1 class="text-4xl font-bold text-[#1E3A6B] p-4 pb-8">اطلاعات گره</h1>
 
         <div bind:this={container} class="graph-container"></div>
     </div>
 </div>
 <div class="flex flex-row justify-end w-full">
     <Button variant="ghost" size="icon" on:click={closePanel}>
-        <ChevronRight class="text-gray-500" />
+        <ChevronRight class="text-[rgba(30,58,107,0.56)]" />
     </Button>
 </div>
 
@@ -116,7 +116,7 @@
     .graph-container {
         height: 400px;
         width: 400px;
-        background-color: white;
+        background-color: #F4F6F7;
         direction: ltr;
     }
 </style>

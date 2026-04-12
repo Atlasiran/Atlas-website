@@ -27,7 +27,7 @@
 
         /* allow click-through to backdrop */
         pointer-events: none;
-        @apply text-gray-950;
+        @apply text-[#1E3A6B];
     }
 
     .contents {
@@ -40,6 +40,6 @@
         pointer-events: auto;
         max-height: calc(100vh - 200px);
         overflow-y: auto;
-        @apply bg-indigo-50;
+        @apply bg-[#EDE3C7];
     }
 </style>

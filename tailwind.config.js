@@ -47,15 +47,38 @@ const config = {
 				card: {
 					DEFAULT: "hsl(var(--card) / <alpha-value>)",
 					foreground: "hsl(var(--card-foreground) / <alpha-value>)"
+				},
+				navy: {
+					DEFAULT: "#1E3A6B",
+					64: "rgba(30,58,107,0.64)",
+					44: "rgba(30,58,107,0.44)",
+					12: "rgba(30,58,107,0.12)",
+					"06": "rgba(30,58,107,0.06)"
+				},
+				sky: {
+					atlas: "#8CDAF5",
+					light: "rgba(140,218,245,0.15)"
+				},
+				teal: {
+					atlas: "#0EBB90"
+				},
+				warm: {
+					beige: "#EDE3C7"
+				},
+				atlas: {
+					bg: "#F4F6F7"
 				}
 			},
 			borderRadius: {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",
-				sm: "calc(var(--radius) - 4px)"
+				sm: "calc(var(--radius) - 4px)",
+				xl: "calc(var(--radius) + 4px)",
+				"2xl": "calc(var(--radius) + 8px)",
+				pill: "999px"
 			},
 			fontFamily: {
-				sans: ["Shabnam",...fontFamily.sans]
+				sans: ["Shabnam", ...fontFamily.sans]
 			}
 		}
 	},

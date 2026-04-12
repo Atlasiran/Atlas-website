@@ -4,7 +4,7 @@
     import Link from "lucide-svelte/icons/link";
     import Scale from "lucide-svelte/icons/scale";
     import ScrollText from "lucide-svelte/icons/scroll-text";
-    import Fullscreen from "lucide-svelte/icons/fullscreen";
+    import Building2 from "lucide-svelte/icons/building-2";
     import MapPin from "lucide-svelte/icons/map-pin";
     import Users from "lucide-svelte/icons/users";
     import * as Tooltip from "$lib/components/ui/tooltip/index.js";
@@ -95,17 +95,17 @@
 
     $: name= name_fa || name_en || name_short || id || "بدون نام";
 </script>
-<Loading {loading} class="mb-4">
-    <button on:click={handleCardClick} class="w-full {!pageLink? 'cursor-default':''}">
+<Loading {loading} class="mb-4 h-full">
+    <button on:click={handleCardClick} class="w-full h-full {!pageLink? 'cursor-default':''}">
         <Card.Root
-            class="w-full  shadow-sm hover:shadow-md {pageLink
+            class="w-full h-full flex flex-col shadow-sm hover:shadow-md {pageLink
                 ? ' transition-all cursor-pointer '
                 : ''}"
         >
             <Card.Header>
                 <div class="flex flex-row gap-4">
                     <div class="w-[78px] flex flex-row justify-center">
-                        {#if logo}
+                        {#if logo && logo !== 'logos/temporary.png'}
                             <div class="image-wrapper">
                                 <img
                                     src={logo}
@@ -115,7 +115,7 @@
                             </div>
                         {:else}
                             <div class="image-wrapper">
-                                <Fullscreen class="h-8 w-8" />
+                                <Building2 class="h-8 w-8 text-[rgba(30,58,107,0.4)]" />
                             </div>
                         {/if}
                     </div>
@@ -166,7 +166,7 @@
                     </div>
                 </div>
             </Card.Header>
-            <Card.Content>
+            <Card.Content class="flex-1">
                 <div class="flex flex-row content-container">
                     <div
                         class="flex flex-col items-start space-x-4 rounded p-2 w-full"
@@ -280,7 +280,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: white;
+        background-color: #F4F6F7;
         overflow: hidden;
     }
 

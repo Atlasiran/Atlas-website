@@ -28,11 +28,11 @@
         "background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%)";
 </script>
 
-<div class="w-full bg-white h-64 p-8 shadow-sm" style={headerBg}></div>
+<div class="w-full h-48 p-8" style={headerBg}></div>
 
 <div class="w-full mx-auto max-w-[800px] relative">
     <div
-        class="w-16 h-16 bg-white rounded-md border top-[-40px] absolute p-2 text-gray-700 md:right-0 right-8"
+        class="w-16 h-16 bg-[#F4F6F7] rounded-md border border-[rgba(30,58,107,0.12)] top-[-40px] absolute p-2 text-[#1E3A6B] md:right-0 right-8"
     >
         <slot name="page-logo" />
     </div>

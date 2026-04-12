@@ -12,7 +12,7 @@
     <slot></slot>
     {#if loading}
         <div
-            class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75"
+            class="absolute inset-0 flex items-center justify-center bg-[#F4F6F7] bg-opacity-80"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

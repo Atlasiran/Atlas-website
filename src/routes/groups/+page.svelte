@@ -176,8 +176,8 @@
 
 <div class="container mx-auto pt-8">
     <div class="mb-32">
-        <h1 class="text-4xl font-bold text-indigo-400 mb-4">گروه‌ها</h1>
-        <p class="text-justify text-gray-600">
+        <h1 class="text-4xl font-bold text-[#1E3A6B] mb-4">گروه‌ها</h1>
+        <p class="text-justify text-[rgba(30,58,107,0.64)]">
             در این بخش می‌توانید اطلاعات مربوط به نهادهای مدنی را
             مشاهده کنید. این نهادها بر اساس مستندات عمومی جمع‌آوری شده‌اند. اگر اطلاعاتی در این
             اطلس ناقص یا نادرست است، لطفن به ما
@@ -192,7 +192,7 @@
                 <Card.Root
                     class=" h-full flex flex-col items-center justify-center cursor-pointer"
                 >
-                    <div class="text-4xl text-indigo-400">+</div>
+                    <div class="text-4xl text-[#0EBB90]">+</div>
                     <span> افزودن گروه جدید </span>
                 </Card.Root>
             </button>

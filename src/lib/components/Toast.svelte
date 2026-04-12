@@ -56,9 +56,17 @@
         @apply fixed bottom-4 right-4 flex flex-col space-y-2;
     }
     .toast {
-        @apply bg-gray-100 text-gray-600 p-4 rounded-lg border-2 border-gray-200;
+        @apply p-4 rounded-lg border-2;
+        background-color: #F4F6F7;
+        color: #1E3A6B;
+        border-color: rgba(30, 58, 107, 0.12);
     }
     .close-btn {
-        @apply ml-4 p-2 bg-gray-900 text-gray-200 rounded hover:bg-gray-700;
+        @apply ml-4 p-2 rounded;
+        background-color: #1E3A6B;
+        color: #F4F6F7;
+    }
+    .close-btn:hover {
+        background-color: rgba(30, 58, 107, 0.8);
     }
 </style>

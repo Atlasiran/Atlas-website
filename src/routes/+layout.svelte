@@ -75,7 +75,7 @@
 </svlete:head>
 <Toaster />
 
-<div class="flex h-screen flex-col justify-between pt-[49px]">
+<div class="flex h-screen flex-col justify-between pt-[56px]">
     <!-- <button on:click={() => toast(" با موفقیت انجام شد")}>
         با موفقیت انجام شد
     </button> -->

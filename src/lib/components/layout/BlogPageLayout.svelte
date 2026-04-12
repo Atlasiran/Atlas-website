@@ -6,8 +6,6 @@
     onMount(() => {});
 </script>
 
-<slot name="header" />
-
 <div class="container mx-auto" dir="auto">
     <slot />
 </div>
