@@ -1,0 +1,107 @@
+backend:
+  name: github
+  repo: Atlasiran/Atlas-website
+  branch: main
+  auth_type: pkce
+  app_id: Ov23lixuXICVvk5XiKbI
+  base_url: https://atlasiran.org
+
+# Where uploaded logos are stored and served from
+media_folder: "static/logos"
+public_folder: "/logos"
+
+# Locale for the editor UI
+locale: "en"
+
+collections:
+
+  # ── Organisations & Parties ───────────────────────────────────────────────
+  - name: "org-pages"
+    label: "Organisations & Parties"
+    label_singular: "Organisation / Party"
+    folder: "src/content/org-pages"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{title}}"
+    identifier_field: "title"
+    summary: "{{name_en}} ({{org_type}}) — {{location}}"
+    fields:
+      - { label: "Slug / Filename", name: "title", widget: "string", hint: "Use English name with hyphens, e.g. Impact-Iran. This becomes the URL." }
+      - label: "Type"
+        name: "org_type"
+        widget: "select"
+        options:
+          - { label: "Organisation (ORG)", value: "ORG" }
+          - { label: "Human-rights Org (H_ORG)", value: "H_ORG" }
+          - { label: "Political Party (PARTY)", value: "PARTY" }
+          - { label: "Political Organisation (P_ORG)", value: "P_ORG" }
+          - { label: "Media (رسانه)", value: "رسانه" }
+          - { label: "Project (پروژه)", value: "پروژه" }
+          - { label: "Various (گوناگون)", value: "گوناگون" }
+          - { label: "Closed Political Org (سازمان سیاسی - بسته شده)", value: "سازمان سیاسی - بسته شده" }
+      - { label: "Logo", name: "logo", widget: "image", required: false, allow_multiple: false, default: "logos/temporary.png" }
+      - { label: "Persian Name (نام فارسی)", name: "name_fa", widget: "string", required: false }
+      - { label: "Latin Name (نام لاتین)", name: "name_en", widget: "string", required: false }
+      - { label: "Short Name (نام کوتاه)", name: "name_short", widget: "string", required: false }
+      - { label: "Location (مکان)", name: "location", widget: "string", required: false, hint: "Country code or city, e.g. DE, US, Berlin" }
+      - { label: "Postal Address (نشانی پستی)", name: "post_location", widget: "string", required: false }
+      - { label: "Website (وب‌سایت)", name: "internetAddress", widget: "string", required: false }
+      - { label: "Contact Email (ایمیل)", name: "contact", widget: "string", required: false }
+      - { label: "Phone (تلفن)", name: "phone", widget: "string", required: false }
+      - { label: "About (درباره)", name: "about", widget: "text", required: false }
+      - { label: "Expertise (تخصص‌ها)", name: "expertise", widget: "text", required: false }
+      - { label: "History (تاریخ‌چه)", name: "history", widget: "text", required: false }
+      - { label: "Manifest (منیفست)", name: "manifest", widget: "text", required: false }
+      - { label: "Charter / CoC (مرام‌نامه)", name: "coc", widget: "text", required: false }
+      - { label: "Estimated Members (تعداد تخمینی اعضا)", name: "estimation_of_members", widget: "string", required: false }
+      - { label: "Political Orientation (گرایش سیاسی)", name: "political_orientation", widget: "string", required: false }
+      - { label: "Telegram", name: "social_telegram", widget: "string", required: false }
+      - { label: "Instagram", name: "social_instagram", widget: "string", required: false }
+      - { label: "X / Twitter", name: "social_x", widget: "string", required: false }
+      - { label: "Facebook", name: "social_facebook", widget: "string", required: false }
+      - { label: "YouTube", name: "social_youtube", widget: "string", required: false }
+      - { label: "Created At (ثبت شده در)", name: "created_at", widget: "string", required: false }
+      - { label: "Updated At (بروزرسانی)", name: "updated_at", widget: "string", required: false }
+      - { label: "ID", name: "id", widget: "string", required: false, hint: "Internal numeric ID — leave blank for new entries." }
+      - { label: "Page Link", name: "pageLink", widget: "string", required: false, hint: "Auto-set, e.g. /op/Impact-Iran" }
+      # Admin-only fields
+      - { label: "Mark for Edit", name: "markForEdit", widget: "string", required: false }
+      - { label: "Mark for Delete", name: "mark_for_delete", widget: "string", required: false }
+      - { label: "Delete Reason", name: "delete_reason", widget: "string", required: false }
+      - { label: "Deleted At", name: "deleted_at", widget: "string", required: false }
+      - { label: "Header Background (CSS)", name: "headerBg", widget: "hidden", default: "background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);" }
+
+  # ── Blog Posts ────────────────────────────────────────────────────────────
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Post"
+    folder: "src/content/posts"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Updated", name: "updated", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # ── Static Pages ──────────────────────────────────────────────────────────
+  - name: "pages"
+    label: "Pages"
+    label_singular: "Page"
+    folder: "src/content/pages"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Updated", name: "updated", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: "Header Background (CSS)", name: "headerBg", widget: "hidden", default: "background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);" }
+      - { label: "Body", name: "body", widget: "markdown" }
