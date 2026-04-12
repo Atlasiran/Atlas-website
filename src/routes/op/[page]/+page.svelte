@@ -14,7 +14,34 @@
     const orgName = m.name_fa || m.name_en || m.name_short || m.title;
 
     function defined(v) { return v && v !== "None" && v.trim() !== ""; }
+
+    const SITE_URL = "https://atlasiran.org";
+    const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
+    const ogTitle = [orgName, "اطلس جامعه مدنی ایران"].filter(Boolean).join(" | ");
+    const ogDescription = defined(m.about)
+        ? m.about
+        : [m.org_type, defined(m.location) ? m.location : null]
+              .filter(Boolean)
+              .join(" — ") || "اطلس جامعه مدنی ایران";
+    const ogImage = defined(m.logo) ? `${SITE_URL}/${m.logo}` : DEFAULT_OG_IMAGE;
+    const ogUrl = `${SITE_URL}${m.pageLink || ""}`;
 </script>
+
+<svelte:head>
+    <title>{ogTitle}</title>
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:site_name" content="اطلس جامعه مدنی ایران" />
+    <meta name="description" content={ogDescription} />
+    <meta name="twitter:card" content={defined(m.logo) ? "summary" : "summary_large_image"} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+</svelte:head>
 
 {#if !m.isSvx}
     <OrgPageLayout {...m}>
