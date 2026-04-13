@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "python3 deploy/md_to_json.py src/content/org-pages --output static/data/data.json && vite build",
+		"build": "python3 deploy/md_to_json.py src/content/org-pages --output static/data/data.json && python3 deploy/gen_org_og_images.py && vite build",
 		"preview": "vite preview"
 	},
 	"devDependencies": {

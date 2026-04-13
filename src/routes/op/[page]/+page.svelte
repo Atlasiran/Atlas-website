@@ -21,13 +21,18 @@
     const ogTitle = [orgName, "اطلس جامعه مدنی ایران"]
         .filter(Boolean)
         .join(" | ");
-    const ogDescription = defined(m.about)
-        ? m.about
-        : [m.org_type, defined(m.location) ? m.location : null]
-              .filter(Boolean)
-              .join(" — ") || "اطلس جامعه مدنی ایران";
-    const ogImage = defined(m.logo)
-        ? `${SITE_URL}/${m.logo}`
+    const ogDescription = (() => {
+        if (defined(m.about)) return m.about;
+        const parts = [
+            defined(m.expertise) ? m.expertise : null,
+            defined(m.political_orientation) ? m.political_orientation : null,
+            defined(m.location) ? m.location : null,
+        ].filter(Boolean);
+        return parts.length ? parts.join(" · ") : "اطلس جامعه مدنی ایران";
+    })();
+    const slug = m.pageLink ? m.pageLink.replace(/^\/op\//, "") : null;
+    const ogImage = slug
+        ? `${SITE_URL}/og/op/${slug}.jpg`
         : DEFAULT_OG_IMAGE;
     const ogUrl = `${SITE_URL}${m.pageLink || ""}`;
 </script>
@@ -38,13 +43,12 @@
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={ogUrl} />
     <meta property="og:site_name" content="اطلس جامعه مدنی ایران" />
     <meta name="description" content={ogDescription} />
-    <meta
-        name="twitter:card"
-        content={defined(m.logo) ? "summary" : "summary_large_image"}
-    />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImage} />
