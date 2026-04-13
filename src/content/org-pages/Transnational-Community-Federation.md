@@ -4,7 +4,7 @@ org_type: ORG
 logo: logos/7.png
 name_fa: فدراسیون جامعه‌ی تراملّی
 name_en: Transnational Community Federation e.V.
-name_short: ''
+name_short: TCF
 location: Transnational, DE
 post_location: ''
 internetAddress: https://transcf.org
