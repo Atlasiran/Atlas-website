@@ -4,6 +4,7 @@
     import OrgPageLayout from "@/components/layout/OrgPageLayout.svelte";
     import Building2 from "lucide-svelte/icons/building-2";
     import Link from "lucide-svelte/icons/link";
+    import { base } from '$app/paths';
     export let data;
 
     const m = data.meta;
@@ -96,7 +97,7 @@
             <div class="mb-8 flex items-start gap-5">
                 {#if defined(m.logo)}
                     <img
-                        src="/{m.logo}"
+                        src="{base}/{m.logo}"
                         alt={orgName}
                         class="w-20 h-20 rounded-xl object-contain bg-white border border-[rgba(30,58,107,0.1)] p-1 shrink-0"
                     />
