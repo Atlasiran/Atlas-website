@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -28,9 +28,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Install Python dependencies
-        run: pip install Pillow arabic-reshaper python-bidi PyYAML
 
       - name: Build static site for GitHub Pages
         env:
