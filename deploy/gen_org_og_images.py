@@ -22,11 +22,14 @@ ORG_DIR  = BASE / "src/content/org-pages"
 LOGO_DIR = BASE / "static/logos"
 OUT_DIR  = BASE / "static/og/op"
 
-FONT_BOLD = BASE / "static/fonts/vazirmatn/Vazirmatn-Bold.ttf"
-FONT_REG  = BASE / "static/fonts/vazirmatn/Vazirmatn-Regular.ttf"
+# Use Shabnam-FD (pre-composed Arabic Presentation Forms) — works with PIL's basic
+# freetype renderer on Linux (Cloudflare). Vazirmatn uses OpenType GSUB which PIL
+# does not apply on Linux, causing broken unjoined letters.
+FONT_BOLD = BASE / "static/fonts/shabnam/Shabnam-Bold-FD.ttf"
+FONT_REG  = BASE / "static/fonts/shabnam/Shabnam-FD.ttf"
 if not FONT_BOLD.exists():
-    FONT_BOLD = BASE / "static/fonts/shabnam/Shabnam-Bold-FD.ttf"
-    FONT_REG  = BASE / "static/fonts/shabnam/Shabnam-FD.ttf"
+    FONT_BOLD = BASE / "static/fonts/vazirmatn/Vazirmatn-Bold.ttf"
+    FONT_REG  = BASE / "static/fonts/vazirmatn/Vazirmatn-Regular.ttf"
 
 W, H = 1200, 630
 
