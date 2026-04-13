@@ -11,6 +11,14 @@
 
     const orgName = [m.name_fa, m.name_en, m.name_short, m.title].find(defined);
 
+    const ORG_TYPE_LABELS = {
+        ORG:   "سازمان مدنی",
+        P_ORG: "سازمان سیاسی",
+        H_ORG: "سازمان حقوق بشری",
+        NGO:   "سازمان غیردولتی (NGO)",
+    };
+    const orgTypeLabel = (m.org_type && ORG_TYPE_LABELS[m.org_type]) || m.org_type || null;
+
     function defined(v) {
         return v && v !== "None" && v.trim() !== "";
     }
@@ -58,14 +66,22 @@
     <OrgPageLayout {...m}>
         <article class="w-full mx-auto max-w-[800px] pt-10 pb-16">
             <!-- Header -->
-            <div class="mb-8">
-                <div
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] mb-3"
-                >
-                    <Building2 class="w-5 h-5" />
-                </div>
+            <div class="mb-8 flex items-start gap-5">
+                {#if defined(m.logo)}
+                    <img
+                        src="/{m.logo}"
+                        alt={orgName}
+                        class="w-20 h-20 rounded-xl object-contain bg-white border border-[rgba(30,58,107,0.1)] p-1 shrink-0"
+                    />
+                {:else}
+                    <div
+                        class="inline-flex items-center justify-center w-20 h-20 rounded-xl bg-[#EDE3C7] text-[#1E3A6B] shrink-0"
+                    >
+                        <Building2 class="w-8 h-8" />
+                    </div>
+                {/if}
                 <h1
-                    class="text-4xl font-bold text-[#1E3A6B] mb-2 pb-4 border-b border-[rgba(30,58,107,0.08)]"
+                    class="text-4xl font-bold text-[#1E3A6B] mb-2 pb-4 border-b border-[rgba(30,58,107,0.08)] w-full"
                 >
                     {orgName}
                 </h1>
@@ -78,7 +94,7 @@
                         نوع نهاد
                     </dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
-                        {m.org_type || "—"}
+                        {orgTypeLabel || "—"}
                     </dd>
                 </div>
                 <div>
@@ -138,7 +154,11 @@
                 <div>
                     <dt class="font-semibold text-[#1E3A6B] mb-0.5">ایمیل</dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
-                        {m.email || "—"}
+                        {#if defined(m.contact)}
+                            <a href="mailto:{m.contact}" class="underline hover:text-[#1E3A6B]">{m.contact}</a>
+                        {:else}
+                            —
+                        {/if}
                     </dd>
                 </div>
                 <div>
