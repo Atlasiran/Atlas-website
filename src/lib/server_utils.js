@@ -18,3 +18,16 @@ export function getAllOPPaths() {
         throw err;
     }
 }
+
+export function getAllBlogPaths() {
+    const postsDirectory = path.join(__dirname, '..', 'content', 'posts');
+    try {
+        const files = readdirSync(postsDirectory);
+        return files
+            .filter(file => file.endsWith('.md') && file.length > 3)
+            .map(file => `/blog/${file.replace('.md', '')}`);
+    } catch (err) {
+        console.error('Error reading directory:', err);
+        throw err;
+    }
+}
