@@ -68,9 +68,11 @@
     })();
     const slug = m.pageLink ? m.pageLink.replace(/^\/op\//, "") : null;
     const ogImage = slug
-        ? `${SITE_URL}/og/op/${slug}.jpg`
+        ? `${SITE_URL}/og/op/${encodeURIComponent(slug)}.jpg`
         : DEFAULT_OG_IMAGE;
-    const ogUrl = `${SITE_URL}${m.pageLink || ""}`;
+    const ogUrl = m.pageLink
+        ? `${SITE_URL}${m.pageLink.split('/').map(encodeURIComponent).join('/')}`
+        : SITE_URL;
 </script>
 
 <svelte:head>

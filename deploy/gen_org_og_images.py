@@ -10,6 +10,7 @@ Usage:
     python3 deploy/gen_org_og_images.py Hengaw        # single slug (no extension)
 """
 
+import re
 import sys
 import yaml
 from pathlib import Path
@@ -180,11 +181,12 @@ def building_icon_circle(size: int) -> Image.Image:
 
 def parse_frontmatter(md_path: Path) -> dict:
     text = md_path.read_text(encoding='utf-8')
-    parts = text.split('---', 2)
-    if len(parts) < 3:
+    # Match --- only at the start of a line to avoid splitting on --- inside values
+    m = re.match(r'^---\r?\n(.*?)\r?\n---(?:\r?\n|$)', text, re.DOTALL)
+    if not m:
         return {}
     try:
-        return yaml.safe_load(parts[1]) or {}
+        return yaml.safe_load(m.group(1)) or {}
     except Exception:
         return {}
 
