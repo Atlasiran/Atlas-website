@@ -32,5 +32,6 @@ export const load = async ({ params }) => {
                         isSvx,
                         ...post.metadata, 
                         slug: params.post, 
-	}
+                }
+        }
 }
