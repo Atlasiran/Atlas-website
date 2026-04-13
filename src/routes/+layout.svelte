@@ -71,7 +71,6 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Atlasworker" />
     <meta name="twitter:creator" content="@Atlasworker" />
-    <meta property="og:image" content="{assets}/twitter_banner.png" />
 </svelte:head>
 <Toaster />
 

@@ -1,5 +1,5 @@
 <script>
-    import { base } from "$app/paths";
+    import { base, assets } from "$app/paths";
     import Logo from "$lib/icons/Logo.svelte";
     import ArrowLeft from "lucide-svelte/icons/arrow-left";
     import ChartNetwork from "lucide-svelte/icons/chart-network";
@@ -36,6 +36,7 @@
 
 <svelte:head>
     <title>اطلس جامعه مدنی ایران - صفحه‌ی اصلی</title>
+    <meta property="og:image" content="{assets}/twitter_banner.png" />
 </svelte:head>
 
 <!-- ═══ HERO ═══ -->
