@@ -33,6 +33,7 @@ collections:
         options:
           - { label: "Organisation (ORG)", value: "ORG" }
           - { label: "Human-rights Org (H_ORG)", value: "H_ORG" }
+          - { label: "NGO (سازمان غیردولتی)", value: "NGO" }
           - { label: "Political Party (PARTY)", value: "PARTY" }
           - { label: "Political Organisation (P_ORG)", value: "P_ORG" }
           - { label: "Media (رسانه)", value: "رسانه" }
