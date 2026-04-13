@@ -64,15 +64,15 @@
     });
 </script>
 
-<svlete:head>
+<svelte:head>
     <meta property="og:title" content={siteTitle} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:description" content={siteDescription} />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Atlasworker" />
     <meta name="twitter:creator" content="@Atlasworker" />
     <meta property="og:image" content="{assets}/twitter_banner.png" />
-</svlete:head>
+</svelte:head>
 <Toaster />
 
 <div class="flex h-screen flex-col justify-between pt-[56px]">

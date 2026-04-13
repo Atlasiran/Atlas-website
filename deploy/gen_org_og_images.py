@@ -121,6 +121,60 @@ def circle_logo(path: Path, size: int):
         return None
 
 
+def building_icon_circle(size: int) -> Image.Image:
+    """Render a building silhouette (matching the UI Building2 icon) in a circle."""
+    img  = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    # circle background — same muted navy-blue as the UI placeholder
+    BG   = (168, 178, 200, 255)   # ~#A8B2C8
+    ICON = (255, 255, 255, 220)
+
+    draw.ellipse([0, 0, size - 1, size - 1], fill=BG)
+
+    # scale-independent drawing grid
+    m  = size * 0.18   # margin
+    cx = size / 2
+
+    # main building body (tall rectangle)
+    bx0 = cx - size * 0.20
+    bx1 = cx + size * 0.20
+    by0 = m + size * 0.08
+    by1 = size - m - size * 0.15  # leave room for ground line
+    draw.rectangle([bx0, by0, bx1, by1], fill=ICON)
+
+    # left wing (shorter)
+    wx0 = m
+    wx1 = bx0 - size * 0.02
+    wy0 = m + size * 0.25
+    wy1 = by1
+    draw.rectangle([wx0, wy0, wx1, wy1], fill=ICON)
+
+    # ground line
+    gl_y = by1 + size * 0.04
+    draw.rectangle([m, gl_y, size - m, gl_y + size * 0.04], fill=ICON)
+
+    # door (cut out dark rect at bottom of main body)
+    dw = size * 0.12
+    dh = size * 0.16
+    dx0 = cx - dw / 2
+    draw.rectangle([dx0, by1 - dh, dx0 + dw, by1], fill=BG)
+
+    # windows on main body: 2 columns × 2 rows
+    ww = size * 0.09
+    wh = size * 0.09
+    for col_x in [cx - size * 0.12, cx + size * 0.03]:
+        for row_y in [by0 + size * 0.06, by0 + size * 0.22]:
+            draw.rectangle([col_x, row_y, col_x + ww, row_y + wh], fill=BG)
+
+    # windows on left wing: 1 column × 1 row
+    wlx = wx0 + (wx1 - wx0) / 2 - ww / 2
+    wly = wy0 + size * 0.06
+    draw.rectangle([wlx, wly, wlx + ww, wly + wh], fill=BG)
+
+    return img
+
+
 def parse_frontmatter(md_path: Path) -> dict:
     text = md_path.read_text(encoding='utf-8')
     parts = text.split('---', 2)
@@ -193,10 +247,17 @@ def generate(m: dict, out_path: Path) -> None:
     LOGO_PAD  = 18
     logo_img  = None
 
-    if defined(logo_file):
+    PLACEHOLDER = "temporary.png"
+    is_real_logo = (defined(logo_file)
+                    and Path(logo_file).name.lower() != PLACEHOLDER)
+
+    if is_real_logo:
         lp = LOGO_DIR / Path(logo_file).name
         if lp.exists():
             logo_img = circle_logo(lp, LOGO_SIZE)
+
+    if logo_img is None:
+        logo_img = building_icon_circle(LOGO_SIZE)
 
     if logo_img:
         bg_sz = LOGO_SIZE + LOGO_PAD * 2
