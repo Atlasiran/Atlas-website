@@ -26,7 +26,7 @@
 		"tailwindcss": "^3.4.10",
 		"tailwindcss-animate": "^1.0.7",
 		"vite": "^5.0.3",
-		"wrangler": "^3.70.0"
+		"wrangler": "^4.82.2"
 	},
 	"type": "module",
 	"dependencies": {
@@ -45,7 +45,6 @@
 		"lucide-svelte": "^0.427.0",
 		"mdsvex-relative-images": "^1.0.3",
 		"mode-watcher": "^0.4.1",
-		"npx": "^3.0.0",
 		"rehype-external-links": "^3.0.0",
 		"shadcn-svelte": "^0.13.0",
 		"sigma": "^3.0.0-beta.26",
