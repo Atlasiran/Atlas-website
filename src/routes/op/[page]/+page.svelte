@@ -9,7 +9,7 @@
     const m = data.meta;
     const { PostContent } = data;
 
-    const orgName = m.name_fa || m.name_en || m.name_short || m.title;
+    const orgName = [m.name_fa, m.name_en, m.name_short, m.title].find(defined);
 
     function defined(v) {
         return v && v !== "None" && v.trim() !== "";
