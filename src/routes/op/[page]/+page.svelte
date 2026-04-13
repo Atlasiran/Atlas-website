@@ -19,6 +19,28 @@
     };
     const orgTypeLabel = (m.org_type && ORG_TYPE_LABELS[m.org_type]) || m.org_type || null;
 
+    // Normalize a social field value to a full URL, or return null if unusable.
+    // Handles: full URLs, @handle, plain handle, Python list literals ['handle'].
+    function socialUrl(value, base) {
+        if (!defined(value)) return null;
+        // Strip Python list literal: ['handle'] or ["handle"]
+        const listMatch = value.match(/^\[['"](.+?)['"]\]$/);
+        if (listMatch) value = listMatch[1];
+        if (!defined(value)) return null;
+        if (value.startsWith('http://') || value.startsWith('https://')) return value;
+        const handle = value.startsWith('@') ? value.slice(1) : value;
+        return `${base}${handle}`;
+    }
+
+    const links = {
+        telegram:  socialUrl(m.social_telegram,  'https://t.me/'),
+        instagram: socialUrl(m.social_instagram, 'https://instagram.com/'),
+        x:         socialUrl(m.social_x,         'https://x.com/'),
+        facebook:  socialUrl(m.social_facebook,  'https://facebook.com/'),
+        youtube:   socialUrl(m.social_youtube,   'https://youtube.com/'),
+        web:       defined(m.internetAddress) && m.internetAddress.startsWith('http') ? m.internetAddress : null,
+    };
+
     function defined(v) {
         return v && v !== "None" && v.trim() !== "";
     }
@@ -229,9 +251,9 @@
                     پیوندها
                 </h2>
                 <div class="flex flex-wrap gap-2">
-                    {#if defined(m.internetAddress)}
+                    {#if links.web}
                         <a
-                            href={m.internetAddress}
+                            href={links.web}
                             target="_blank"
                             rel="noopener"
                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
@@ -243,9 +265,9 @@
                             ><Link class="w-3 h-3" /> وب‌سایت</span
                         >
                     {/if}
-                    {#if defined(m.social_telegram)}
+                    {#if links.telegram}
                         <a
-                            href={m.social_telegram}
+                            href={links.telegram}
                             target="_blank"
                             rel="noopener"
                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
@@ -257,9 +279,9 @@
                             >تلگرام</span
                         >
                     {/if}
-                    {#if defined(m.social_instagram)}
+                    {#if links.instagram}
                         <a
-                            href={m.social_instagram}
+                            href={links.instagram}
                             target="_blank"
                             rel="noopener"
                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
@@ -271,9 +293,9 @@
                             >اینستاگرام</span
                         >
                     {/if}
-                    {#if defined(m.social_x)}
+                    {#if links.x}
                         <a
-                            href={m.social_x}
+                            href={links.x}
                             target="_blank"
                             rel="noopener"
                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
@@ -285,9 +307,9 @@
                             >X</span
                         >
                     {/if}
-                    {#if defined(m.social_facebook)}
+                    {#if links.facebook}
                         <a
-                            href={m.social_facebook}
+                            href={links.facebook}
                             target="_blank"
                             rel="noopener"
                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
@@ -299,9 +321,9 @@
                             >فیس‌بوک</span
                         >
                     {/if}
-                    {#if defined(m.social_youtube)}
+                    {#if links.youtube}
                         <a
-                            href={m.social_youtube}
+                            href={links.youtube}
                             target="_blank"
                             rel="noopener"
                             class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
