@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "pip3 install -q Pillow arabic-reshaper python-bidi PyYAML && python3 deploy/md_to_json.py src/content/org-pages --output static/data/data.json && python3 deploy/gen_org_og_images.py && vite build",
+		"build": "python3 deploy/md_to_json.py src/content/org-pages --output static/data/data.json && vite build",
+		"gen:og": "pip3 install -q Pillow arabic-reshaper python-bidi PyYAML && python3 deploy/gen_org_og_images.py",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
