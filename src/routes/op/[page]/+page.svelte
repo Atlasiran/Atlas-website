@@ -53,6 +53,7 @@
 
     const SITE_URL = "https://atlasiran.org";
     const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+    const REPORT_EMAIL = "hi@atlasiran.org";
 
     const ogTitle = [orgName, "اطلس جامعه مدنی ایران"]
         .filter(Boolean)
@@ -73,6 +74,10 @@
     const ogUrl = m.pageLink
         ? `${SITE_URL}${m.pageLink.split('/').map(encodeURIComponent).join('/')}`
         : SITE_URL;
+
+    const reportSubject = encodeURIComponent(`درخواست ویرایش نهاد ${orgName || ''}`);
+    const reportBody = encodeURIComponent(`آدرس صفحه: ${ogUrl}`);
+    const reportLink = `mailto:${REPORT_EMAIL}?subject=${reportSubject}&body=${reportBody}`;
 </script>
 
 <svelte:head>
@@ -94,7 +99,7 @@
 
 {#if !m.isSvx}
     <OrgPageLayout {...m}>
-        <article class="w-full mx-auto max-w-[800px] pt-10 pb-16">
+        <article class="w-full mx-auto max-w-[960px] pt-10 pb-16">
             <!-- Header -->
             <div class="mb-8 flex items-start gap-5">
                 {#if defined(m.logo)}
@@ -152,6 +157,14 @@
                     </dd>
                 </div>
                 <div>
+                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">
+                        نام محلی
+                    </dt>
+                    <dd class="text-[rgba(30,58,107,0.72)]">
+                        {m.name_local || "—"}
+                    </dd>
+                </div>
+                <div>
                     <dt class="font-semibold text-[#1E3A6B] mb-0.5">مکان</dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
                         {m.location || "—"}
@@ -176,13 +189,14 @@
                 <div>
                     <dt class="font-semibold text-[#1E3A6B] mb-0.5">
                         گرایش سیاسی
+                        <span class="font-normal text-[rgba(30,58,107,0.5)] text-xs">(این برداشت ماست)</span>
                     </dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
                         {m.political_orientation || "—"}
                     </dd>
                 </div>
                 <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">ایمیل</dt>
+                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">ایمیل یا راه تماس</dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
                         {#if defined(m.contact)}
                             <a href="mailto:{m.contact}" class="underline hover:text-[#1E3A6B]">{m.contact}</a>
@@ -199,14 +213,6 @@
                 </div>
                 <div>
                     <dt class="font-semibold text-[#1E3A6B] mb-0.5">
-                        ثبت شده در
-                    </dt>
-                    <dd class="text-[rgba(30,58,107,0.72)]">
-                        {m.created_at || "—"}
-                    </dd>
-                </div>
-                <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">
                         بروزرسانی
                     </dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
@@ -215,140 +221,128 @@
                 </div>
             </dl>
 
-            <!-- About -->
-            <div class="mt-6">
-                <h2 class="font-semibold text-[#1E3A6B] mb-2">درباره</h2>
-                <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
-                    {m.about || "—"}
-                </p>
-            </div>
+            <!-- Main content + links sidebar (flex-row-reverse puts aside on the left visually) -->
+            <div class="mt-6 flex flex-col lg:flex-row-reverse gap-8 items-start">
 
-            <!-- Detail fields -->
-            <dl class="mt-6 grid grid-cols-1 gap-y-4 text-sm">
-                <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">تخصص‌ها</dt>
-                    <dd class="text-[rgba(30,58,107,0.72)]">
-                        {m.expertise || "—"}
-                    </dd>
-                </div>
-                <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">
-                        تاریخ‌چه
-                    </dt>
-                    <dd class="text-[rgba(30,58,107,0.72)]">
-                        {m.history || "—"}
-                    </dd>
-                </div>
-                <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">منیفست</dt>
-                    <dd class="text-[rgba(30,58,107,0.72)]">
-                        {m.manifest || "—"}
-                    </dd>
-                </div>
-                <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">
-                        مرام‌نامه
-                    </dt>
-                    <dd class="text-[rgba(30,58,107,0.72)]">{m.coc || "—"}</dd>
-                </div>
-            </dl>
+                <!-- Main content -->
+                <div class="flex-1 min-w-0">
 
-            <!-- Social links -->
-            <div class="mt-6">
-                <h2 class="font-semibold text-[#1E3A6B] mb-3 text-sm">
-                    پیوندها
-                </h2>
-                <div class="flex flex-wrap gap-2">
-                    {#if links.web}
-                        <a
-                            href={links.web}
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
-                            ><Link class="w-3 h-3" /> وب‌سایت</a
-                        >
-                    {:else}
-                        <span
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[rgba(30,58,107,0.06)] text-[rgba(30,58,107,0.36)] text-xs"
-                            ><Link class="w-3 h-3" /> وب‌سایت</span
-                        >
-                    {/if}
-                    {#if links.telegram}
-                        <a
-                            href={links.telegram}
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
-                            >تلگرام</a
-                        >
-                    {:else}
-                        <span
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[rgba(30,58,107,0.06)] text-[rgba(30,58,107,0.36)] text-xs"
-                            >تلگرام</span
-                        >
-                    {/if}
-                    {#if links.instagram}
-                        <a
-                            href={links.instagram}
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
-                            >اینستاگرام</a
-                        >
-                    {:else}
-                        <span
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[rgba(30,58,107,0.06)] text-[rgba(30,58,107,0.36)] text-xs"
-                            >اینستاگرام</span
-                        >
-                    {/if}
-                    {#if links.x}
-                        <a
-                            href={links.x}
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
-                            >X</a
-                        >
-                    {:else}
-                        <span
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[rgba(30,58,107,0.06)] text-[rgba(30,58,107,0.36)] text-xs"
-                            >X</span
-                        >
-                    {/if}
-                    {#if links.facebook}
-                        <a
-                            href={links.facebook}
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
-                            >فیس‌بوک</a
-                        >
-                    {:else}
-                        <span
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[rgba(30,58,107,0.06)] text-[rgba(30,58,107,0.36)] text-xs"
-                            >فیس‌بوک</span
-                        >
-                    {/if}
-                    {#if links.youtube}
-                        <a
-                            href={links.youtube}
-                            target="_blank"
-                            rel="noopener"
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0]"
-                            >یوتیوب</a
-                        >
-                    {:else}
-                        <span
-                            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[rgba(30,58,107,0.06)] text-[rgba(30,58,107,0.36)] text-xs"
-                            >یوتیوب</span
-                        >
-                    {/if}
-                </div>
-            </div>
+                    <!-- تخصص‌ها -->
+                    <div class="mb-4">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">تخصص‌ها</h2>
+                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                            {m.expertise || "—"}
+                        </p>
+                    </div>
 
-            <!-- Markdown body (if any) -->
-            <div class="prose lg:prose-xl mt-8">
-                <svelte:component this={PostContent} dir="auto" />
+                    <!-- مرامنامه یا مانیفست -->
+                    <div class="mb-4">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">مرامنامه یا مانیفست</h2>
+                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                            {#if defined(m.coc) || defined(m.manifest)}
+                                {#if defined(m.coc)}{m.coc}{/if}{#if defined(m.coc) && defined(m.manifest)}<br />{/if}{#if defined(m.manifest)}{m.manifest}{/if}
+                            {:else}
+                                —
+                            {/if}
+                        </p>
+                    </div>
+
+                    <!-- درباره -->
+                    <div class="mb-4">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">درباره</h2>
+                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                            {m.about || "—"}
+                        </p>
+                    </div>
+
+                    <!-- تاریخچه -->
+                    <div class="mb-4">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">تاریخچه</h2>
+                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                            {m.history || "—"}
+                        </p>
+                    </div>
+
+                    <!-- Markdown body (if any) -->
+                    <div class="prose lg:prose-xl mt-8">
+                        <svelte:component this={PostContent} dir="auto" />
+                    </div>
+
+                    <!-- Report error -->
+                    <div class="mt-10 pt-6 border-t border-[rgba(30,58,107,0.12)] flex flex-col sm:flex-row sm:items-center gap-3">
+                        <p class="text-sm text-[rgba(30,58,107,0.55)] flex-1">
+                            آیا اطلاعاتی در این صفحه نادرست است؟ می‌توانید درخواست ویرایش ارسال کنید.
+                        </p>
+                        <a
+                            href={reportLink}
+                            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[rgba(30,58,107,0.07)] text-[#1E3A6B] text-sm font-medium hover:bg-[rgba(30,58,107,0.14)] transition-colors shrink-0"
+                        >
+                            درخواست ویرایش اطلاعات
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Links sidebar (appears on the left in RTL flex-row-reverse layout) -->
+                <aside class="w-full lg:w-52 lg:shrink-0">
+                    <div class="lg:sticky lg:top-6 rounded-xl border border-[rgba(30,58,107,0.1)] bg-[rgba(30,58,107,0.02)] p-4">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-3 text-sm">پیوندها</h2>
+                        <div class="flex flex-wrap lg:flex-col gap-2">
+                            {#if links.web}
+                                <a
+                                    href={links.web}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                ><Link class="w-3.5 h-3.5 shrink-0" /> وب‌سایت</a>
+                            {/if}
+                            {#if links.telegram}
+                                <a
+                                    href={links.telegram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >تلگرام</a>
+                            {/if}
+                            {#if links.instagram}
+                                <a
+                                    href={links.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >اینستاگرام</a>
+                            {/if}
+                            {#if links.x}
+                                <a
+                                    href={links.x}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >X</a>
+                            {/if}
+                            {#if links.facebook}
+                                <a
+                                    href={links.facebook}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >فیس‌بوک</a>
+                            {/if}
+                            {#if links.youtube}
+                                <a
+                                    href={links.youtube}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >یوتیوب</a>
+                            {/if}
+                            {#if !links.web && !links.telegram && !links.instagram && !links.x && !links.facebook && !links.youtube}
+                                <span class="text-xs text-[rgba(30,58,107,0.4)]">—</span>
+                            {/if}
+                        </div>
+                    </div>
+                </aside>
+
             </div>
         </article>
     </OrgPageLayout>
