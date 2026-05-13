@@ -49,10 +49,6 @@
             پروژه‌ی نقشه‌برداری جامعه مدنی
         </div>
 
-        <div class="hero-globe">
-            <GovernanceGlobe />
-        </div>
-
         <h1 class="hero-h1">اطلس جامعه مدنی ایران</h1>
 
         <p class="hero-sub">
@@ -62,6 +58,10 @@
         <div class="flex flex-row flex-wrap gap-3 justify-center">
             <a href="{base}/groups" class="btn-primary">کاوش نهادها</a>
             <a href="{base}/p/about-us" class="btn-outline">درباره اطلس</a>
+        </div>
+
+        <div class="hero-globe">
+            <GovernanceGlobe />
         </div>
     </div>
 </section>
