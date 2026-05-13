@@ -1,5 +1,5 @@
 <script>
-    import { base, assets } from "$app/paths";
+    import { assets, base } from "$app/paths";
     import GovernanceGlobe from "$lib/icons/GovernanceGlobe.svelte";
     import ArrowLeft from "lucide-svelte/icons/arrow-left";
     import ChartNetwork from "lucide-svelte/icons/chart-network";
