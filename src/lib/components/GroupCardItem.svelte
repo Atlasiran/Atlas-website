@@ -1,25 +1,23 @@
 <script>
-    import Button from "@/components/ui/button/button.svelte";
-    import * as Card from "$lib/components/ui/card/index.js";
-    import Link from "lucide-svelte/icons/link";
-    import Scale from "lucide-svelte/icons/scale";
-    import ScrollText from "lucide-svelte/icons/scroll-text";
-    import Building2 from "lucide-svelte/icons/building-2";
-    import MapPin from "lucide-svelte/icons/map-pin";
-    import Users from "lucide-svelte/icons/users";
-    import * as Tooltip from "$lib/components/ui/tooltip/index.js";
-    import ListAllGroups from "@/components/ListAllGroups.svelte";
-    import Pencil from "lucide-svelte/icons/pencil";
-    import Trash from "lucide-svelte/icons/trash";
-    import { createEventDispatcher } from "svelte";
-    import XIcon from "@/icons/XIcon.svelte";
-    import InstagramIcon from "@/icons/InstagramIcon.svelte";
-    import TelegramIcon from "@/icons/TelegramIcon.svelte";
-    import ArrowUpRight from "lucide-svelte/icons/arrow-up-right";
-    import Loading from "@/components/ui/loading/Loading.svelte";
     import { goto } from "$app/navigation";
     import { base } from "$app/paths";
+    import * as Card from "$lib/components/ui/card/index.js";
+    import * as Tooltip from "$lib/components/ui/tooltip/index.js";
     import { authStore } from "$lib/stores/authStore";
+    import Button from "@/components/ui/button/button.svelte";
+    import Loading from "@/components/ui/loading/Loading.svelte";
+    import InstagramIcon from "@/icons/InstagramIcon.svelte";
+    import TelegramIcon from "@/icons/TelegramIcon.svelte";
+    import XIcon from "@/icons/XIcon.svelte";
+    import Building2 from "lucide-svelte/icons/building-2";
+    import Link from "lucide-svelte/icons/link";
+    import MapPin from "lucide-svelte/icons/map-pin";
+    import Pencil from "lucide-svelte/icons/pencil";
+    import Scale from "lucide-svelte/icons/scale";
+    import ScrollText from "lucide-svelte/icons/scroll-text";
+    import Trash from "lucide-svelte/icons/trash";
+    import Users from "lucide-svelte/icons/users";
+    import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
     export let id = "";
@@ -65,7 +63,6 @@
 
     function handleEdit(e) {
         dispatch("edit", { id });
-
     }
 
     function handleDelete(e) {
@@ -73,30 +70,33 @@
     }
 
     function handleCardClick(e) {
-        if (!pageLink){
+        if (!pageLink) {
             return;
         }
         goto(`${base}${pageLink}`);
     }
 
     function gotoPage(link) {
-        return (e) =>{
-            if(!link || typeof window === "undefined"){
+        return (e) => {
+            if (!link || typeof window === "undefined") {
                 return;
             }
 
             e.preventDefault();
             e.stopPropagation();
-            
+
             window.open(link, "_blank");
-        }
+        };
     }
 
-
-    $: name= name_fa || name_en || name_short || id || "بدون نام";
+    $: name = name_fa || name_en || name_short || id || "بدون نام";
 </script>
+
 <Loading {loading} class="mb-4 h-full">
-    <button on:click={handleCardClick} class="w-full h-full {!pageLink? 'cursor-default':''}">
+    <button
+        on:click={handleCardClick}
+        class="w-full h-full {!pageLink ? 'cursor-default' : ''}"
+    >
         <Card.Root
             class="w-full h-full flex flex-col shadow-sm hover:shadow-md {pageLink
                 ? ' transition-all cursor-pointer '
@@ -105,7 +105,7 @@
             <Card.Header>
                 <div class="flex flex-row gap-4">
                     <div class="w-[78px] flex flex-row justify-center">
-                        {#if logo && logo !== 'logos/temporary.png'}
+                        {#if logo && logo !== "logos/temporary.png"}
                             <div class="image-wrapper">
                                 <img
                                     src={logo}
@@ -115,7 +115,9 @@
                             </div>
                         {:else}
                             <div class="image-wrapper">
-                                <Building2 class="h-8 w-8 text-[rgba(30,58,107,0.4)]" />
+                                <Building2
+                                    class="h-8 w-8 text-[rgba(30,58,107,0.4)]"
+                                />
                             </div>
                         {/if}
                     </div>
@@ -173,7 +175,7 @@
                     >
                         <div class="flex-1 space-y-1 w-full">
                             <p dir="auto" class="about">
-                                {#if about && !about.startsWith('http')}
+                                {#if about && !about.startsWith("http")}
                                     {truncateString(about, 100)}
                                 {/if}
                             </p>
@@ -211,27 +213,27 @@
                     {/if}
 
                     {#if social_x}
-                            <Button
-                                variant="outline"
-                                on:click={gotoPage(`${social_x}`)}
-                            >
-                                <div class="h-4 w-4">
-                                    <XIcon />
-                                </div>
-                            </Button>
+                        <Button
+                            variant="outline"
+                            on:click={gotoPage(`${social_x}`)}
+                        >
+                            <div class="h-4 w-4">
+                                <XIcon />
+                            </div>
+                        </Button>
                     {/if}
 
                     {#if social_instagram}
-                            <Button
-                                variant="outline"
-                                on:click={gotoPage(`${social_instagram}`)}
-                            >
-                                <div class="h-4 w-4">
-                                    <InstagramIcon />
-                                </div>
-                            </Button>
+                        <Button
+                            variant="outline"
+                            on:click={gotoPage(`${social_instagram}`)}
+                        >
+                            <div class="h-4 w-4">
+                                <InstagramIcon />
+                            </div>
+                        </Button>
                     {/if}
-                    
+
                     {#if social_telegram}
                         <Button
                             variant="outline"
@@ -281,7 +283,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #F4F6F7;
+        background-color: #f4f6f7;
         overflow: hidden;
     }
 

@@ -1,10 +1,10 @@
 <script>
+    import { base } from "$app/paths";
     import Footer from "@/components/layout/Footer.svelte";
     import Header from "@/components/layout/Header.svelte";
     import OrgPageLayout from "@/components/layout/OrgPageLayout.svelte";
     import Building2 from "lucide-svelte/icons/building-2";
     import Link from "lucide-svelte/icons/link";
-    import { base } from '$app/paths';
     export let data;
 
     const m = data.meta;
@@ -13,17 +13,18 @@
     const orgName = [m.name_fa, m.name_en, m.name_short, m.title].find(defined);
 
     const ORG_TYPE_LABELS = {
-        ORG:   "سازمان مدنی",
+        ORG: "سازمان مدنی",
         P_ORG: "سازمان سیاسی",
         H_ORG: "سازمان حقوق بشری",
-        NGO:   "سازمان غیردولتی (NGO)",
+        NGO: "سازمان غیردولتی (NGO)",
         PARTY: "حزب سیاسی",
         رسانه: "رسانه",
         پروژه: "پروژه",
         گوناگون: "گوناگون",
         "سازمان سیاسی - بسته شده": "سازمان سیاسی - بسته شده",
     };
-    const orgTypeLabel = (m.org_type && ORG_TYPE_LABELS[m.org_type]) || m.org_type || null;
+    const orgTypeLabel =
+        (m.org_type && ORG_TYPE_LABELS[m.org_type]) || m.org_type || null;
 
     // Normalize a social field value to a full URL, or return null if unusable.
     // Handles: full URLs, @handle, plain handle, Python list literals ['handle'].
@@ -33,21 +34,25 @@
         const listMatch = value.match(/^\[['"](.+?)['"]\]$/);
         if (listMatch) value = listMatch[1];
         if (!defined(value)) return null;
-        if (value.startsWith('http://') || value.startsWith('https://')) return value;
-        const handle = value.startsWith('@') ? value.slice(1) : value;
+        if (value.startsWith("http://") || value.startsWith("https://"))
+            return value;
+        const handle = value.startsWith("@") ? value.slice(1) : value;
         return `${base}${handle}`;
     }
 
     const links = {
-        telegram:  socialUrl(m.social_telegram,  'https://t.me/'),
-        instagram: socialUrl(m.social_instagram, 'https://instagram.com/'),
-        x:         socialUrl(m.social_x,         'https://x.com/'),
-        facebook:  socialUrl(m.social_facebook,  'https://facebook.com/'),
-        youtube:   socialUrl(m.social_youtube,   'https://youtube.com/'),
-        bluesky:   socialUrl(m.social_bluesky,   'https://bsky.app/profile/'),
-        linkedin:  socialUrl(m.social_linkedin,  'https://linkedin.com/'),
-        tiktok:    socialUrl(m.social_tiktok,    'https://tiktok.com/@'),
-        web:       defined(m.internetAddress) && m.internetAddress.startsWith('http') ? m.internetAddress : null,
+        telegram: socialUrl(m.social_telegram, "https://t.me/"),
+        instagram: socialUrl(m.social_instagram, "https://instagram.com/"),
+        x: socialUrl(m.social_x, "https://x.com/"),
+        facebook: socialUrl(m.social_facebook, "https://facebook.com/"),
+        youtube: socialUrl(m.social_youtube, "https://youtube.com/"),
+        bluesky: socialUrl(m.social_bluesky, "https://bsky.app/profile/"),
+        linkedin: socialUrl(m.social_linkedin, "https://linkedin.com/"),
+        tiktok: socialUrl(m.social_tiktok, "https://tiktok.com/@"),
+        web:
+            defined(m.internetAddress) && m.internetAddress.startsWith("http")
+                ? m.internetAddress
+                : null,
     };
 
     function defined(v) {
@@ -75,10 +80,12 @@
         ? `${SITE_URL}/og/op/${encodeURIComponent(slug)}.jpg`
         : DEFAULT_OG_IMAGE;
     const ogUrl = m.pageLink
-        ? `${SITE_URL}${m.pageLink.split('/').map(encodeURIComponent).join('/')}`
+        ? `${SITE_URL}${m.pageLink.split("/").map(encodeURIComponent).join("/")}`
         : SITE_URL;
 
-    const reportSubject = encodeURIComponent(`درخواست ویرایش نهاد ${orgName || ''}`);
+    const reportSubject = encodeURIComponent(
+        `درخواست ویرایش نهاد ${orgName || ""}`,
+    );
     const reportBody = encodeURIComponent(`آدرس صفحه: ${ogUrl}`);
     const reportLink = `mailto:${REPORT_EMAIL}?subject=${reportSubject}&body=${reportBody}`;
 </script>
@@ -192,17 +199,26 @@
                 <div>
                     <dt class="font-semibold text-[#1E3A6B] mb-0.5">
                         گرایش سیاسی
-                        <span class="font-normal text-[rgba(30,58,107,0.5)] text-xs">(این برداشت ماست)</span>
+                        <span
+                            class="font-normal text-[rgba(30,58,107,0.5)] text-xs"
+                            >(این برداشت ماست)</span
+                        >
                     </dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
                         {m.political_orientation || "—"}
                     </dd>
                 </div>
                 <div>
-                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">ایمیل یا راه تماس</dt>
+                    <dt class="font-semibold text-[#1E3A6B] mb-0.5">
+                        ایمیل یا راه تماس
+                    </dt>
                     <dd class="text-[rgba(30,58,107,0.72)]">
                         {#if defined(m.contact)}
-                            <a href="mailto:{m.contact}" class="underline hover:text-[#1E3A6B]">{m.contact}</a>
+                            <a
+                                href="mailto:{m.contact}"
+                                class="underline hover:text-[#1E3A6B]"
+                                >{m.contact}</a
+                            >
                         {:else}
                             —
                         {/if}
@@ -225,25 +241,46 @@
             </dl>
 
             <!-- Main content + links sidebar (flex-row-reverse puts aside on the left visually) -->
-            <div class="mt-6 flex flex-col lg:flex-row-reverse gap-8 items-start">
-
+            <div
+                class="mt-6 flex flex-col lg:flex-row-reverse gap-8 items-start"
+            >
                 <!-- Main content -->
                 <div class="flex-1 min-w-0">
-
                     <!-- تخصص‌ها -->
                     <div class="mb-4">
-                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">تخصص‌ها</h2>
-                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">
+                            تخصص‌ها
+                        </h2>
+                        <p
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                        >
                             {m.expertise || "—"}
                         </p>
                     </div>
 
                     <!-- مرامنامه یا مانیفست -->
                     <div class="mb-4">
-                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">مرامنامه یا مانیفست</h2>
-                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">
+                            مرامنامه یا مانیفست
+                        </h2>
+                        <p
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                        >
                             {#if defined(m.coc) || defined(m.manifest)}
-                                {#if defined(m.coc)}{#if m.coc.startsWith('http')}<a href={m.coc} target="_blank" rel="noopener noreferrer" class="underline hover:text-[#1E3A6B]">{m.coc}</a>{:else}{m.coc}{/if}{/if}{#if defined(m.coc) && defined(m.manifest)}<br />{/if}{#if defined(m.manifest)}{#if m.manifest.startsWith('http')}<a href={m.manifest} target="_blank" rel="noopener noreferrer" class="underline hover:text-[#1E3A6B]">{m.manifest}</a>{:else}{m.manifest}{/if}{/if}
+                                {#if defined(m.coc)}{#if m.coc.startsWith("http")}<a
+                                            href={m.coc}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="underline hover:text-[#1E3A6B]"
+                                            >{m.coc}</a
+                                        >{:else}{m.coc}{/if}{/if}{#if defined(m.coc) && defined(m.manifest)}<br
+                                    />{/if}{#if defined(m.manifest)}{#if m.manifest.startsWith("http")}<a
+                                            href={m.manifest}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="underline hover:text-[#1E3A6B]"
+                                            >{m.manifest}</a
+                                        >{:else}{m.manifest}{/if}{/if}
                             {:else}
                                 —
                             {/if}
@@ -252,10 +289,20 @@
 
                     <!-- درباره -->
                     <div class="mb-4">
-                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">درباره</h2>
-                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
-                            {#if m.about && m.about.startsWith('http')}
-                                <a href={m.about} target="_blank" rel="noopener noreferrer" class="underline hover:text-[#1E3A6B]">{m.about}</a>
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">
+                            درباره
+                        </h2>
+                        <p
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                        >
+                            {#if m.about && m.about.startsWith("http")}
+                                <a
+                                    href={m.about}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="underline hover:text-[#1E3A6B]"
+                                    >{m.about}</a
+                                >
                             {:else}
                                 {m.about || "—"}
                             {/if}
@@ -264,8 +311,12 @@
 
                     <!-- تاریخچه -->
                     <div class="mb-4">
-                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">تاریخچه</h2>
-                        <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
+                        <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">
+                            تاریخچه
+                        </h2>
+                        <p
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                        >
                             {m.history || "—"}
                         </p>
                     </div>
@@ -276,9 +327,12 @@
                     </div>
 
                     <!-- Report error -->
-                    <div class="mt-10 pt-6 border-t border-[rgba(30,58,107,0.12)] flex flex-col sm:flex-row sm:items-center gap-3">
+                    <div
+                        class="mt-10 pt-6 border-t border-[rgba(30,58,107,0.12)] flex flex-col sm:flex-row sm:items-center gap-3"
+                    >
                         <p class="text-sm text-[rgba(30,58,107,0.55)] flex-1">
-                            آیا اطلاعاتی در این صفحه نادرست است؟ می‌توانید درخواست ویرایش ارسال کنید.
+                            آیا اطلاعاتی در این صفحه نادرست است؟ می‌توانید
+                            درخواست ویرایش ارسال کنید.
                         </p>
                         <a
                             href={reportLink}
@@ -287,13 +341,16 @@
                             درخواست ویرایش اطلاعات
                         </a>
                     </div>
-
                 </div>
 
                 <!-- Links sidebar (appears on the left in RTL flex-row-reverse layout) -->
                 <aside class="w-full lg:w-52 lg:shrink-0">
-                    <div class="lg:sticky lg:top-6 rounded-xl border border-[rgba(30,58,107,0.1)] bg-[rgba(30,58,107,0.02)] p-4">
-                        <h2 class="font-semibold text-[#1E3A6B] mb-3 text-sm">پیوندها</h2>
+                    <div
+                        class="lg:sticky lg:top-6 rounded-xl border border-[rgba(30,58,107,0.1)] bg-[rgba(30,58,107,0.02)] p-4"
+                    >
+                        <h2 class="font-semibold text-[#1E3A6B] mb-3 text-sm">
+                            پیوندها
+                        </h2>
                         <div class="flex flex-wrap lg:flex-col gap-2">
                             {#if links.web}
                                 <a
@@ -301,7 +358,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                ><Link class="w-3.5 h-3.5 shrink-0" /> وب‌سایت</a>
+                                    ><Link class="w-3.5 h-3.5 shrink-0" /> وب‌سایت</a
+                                >
                             {/if}
                             {#if links.telegram}
                                 <a
@@ -309,7 +367,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >تلگرام</a>
+                                    >تلگرام</a
+                                >
                             {/if}
                             {#if links.instagram}
                                 <a
@@ -317,7 +376,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >اینستاگرام</a>
+                                    >اینستاگرام</a
+                                >
                             {/if}
                             {#if links.x}
                                 <a
@@ -325,7 +385,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >X</a>
+                                    >X</a
+                                >
                             {/if}
                             {#if links.facebook}
                                 <a
@@ -333,7 +394,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >فیس‌بوک</a>
+                                    >فیس‌بوک</a
+                                >
                             {/if}
                             {#if links.youtube}
                                 <a
@@ -341,7 +403,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >یوتیوب</a>
+                                    >یوتیوب</a
+                                >
                             {/if}
                             {#if links.bluesky}
                                 <a
@@ -349,7 +412,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >بلواسکای</a>
+                                    >بلواسکای</a
+                                >
                             {/if}
                             {#if links.linkedin}
                                 <a
@@ -357,7 +421,8 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >لینکدین</a>
+                                    >لینکدین</a
+                                >
                             {/if}
                             {#if links.tiktok}
                                 <a
@@ -365,15 +430,17 @@
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
-                                >تیک‌تاک</a>
+                                    >تیک‌تاک</a
+                                >
                             {/if}
                             {#if !links.web && !links.telegram && !links.instagram && !links.x && !links.facebook && !links.youtube && !links.bluesky && !links.linkedin && !links.tiktok}
-                                <span class="text-xs text-[rgba(30,58,107,0.4)]">—</span>
+                                <span class="text-xs text-[rgba(30,58,107,0.4)]"
+                                    >—</span
+                                >
                             {/if}
                         </div>
                     </div>
                 </aside>
-
             </div>
         </article>
     </OrgPageLayout>
