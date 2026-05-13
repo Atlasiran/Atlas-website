@@ -75,11 +75,13 @@
 <Toaster />
 
 <div class="flex h-screen flex-col justify-between pt-[56px]">
-    <!-- <button on:click={() => toast(" با موفقیت انجام شد")}>
-        با موفقیت انجام شد
-    </button> -->
-
     <Header />
+
+    <!-- Review banner -->
+    <div class="w-full bg-[#EDE3C7] text-[#1E3A6B] text-sm text-center py-2 px-4 leading-relaxed" dir="rtl">
+        داده‌های نسخه‌ی تازه‌ی اطلس برای مدت یک‌ماه برای بازبینی در دسترس همگان قرار دارند. لطفن ایرادات را از راهی که در برگه‌ی هر نهاد آمده برای ما بفرستید.
+    </div>
+
     <main class="mb-auto">
         {#key data?.pathname}
             <div

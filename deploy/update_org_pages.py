@@ -27,6 +27,7 @@ logo: "{_(entry.get('logo', ''))}"
 name_fa: "{_(entry.get('name_fa', ''))}"
 name_en: "{_(entry.get('name_en', ''))}"
 name_short: "{_(entry.get('name_short', ''))}"
+name_local: "{_(entry.get('name_local', ''))}"
 location: "{_(entry.get('location', ''))}"
 post_location: "{_(entry.get('post_location', ''))}"
 internetAddress: "{_(entry.get('internetAddress', ''))}"
@@ -45,6 +46,9 @@ social_facebook: "{_(entry.get('social_facebook', ''))}"
 social_youtube: "{_(entry.get('social_youtube', ''))}"
 social_x: "{_(entry.get('social_x', ''))}"
 social_instagram: "{_(entry.get('social_instagram', ''))}"
+social_bluesky: "{_(entry.get('social_bluesky', ''))}"
+social_linkedin: "{_(entry.get('social_linkedin', ''))}"
+social_tiktok: "{_(entry.get('social_tiktok', ''))}"
 created_at: "{_(entry.get('created_at', ''))}"
 updated_at: "{_(entry.get('updated_at', ''))}"
 mark_for_delete: "{_(entry.get('mark_for_delete', ''))}"
@@ -64,7 +68,7 @@ def getTitle(entry: dict):
     if title == "":
         title = str(entry.get("id"))
     title = title.strip()
-    title = title.replace(" ", "-")
+    title = title.replace(" ", "-").replace("/", "-")
 
     return title
 
@@ -111,6 +115,10 @@ def mapIDtoFileName(output_dir):
 
 
 def update_file_content(file_path, entry, title):
+    if not os.path.exists(file_path):
+        log(f"File not found (was it deleted?), creating: {file_path}")
+        create_new_file(file_path, entry, title)
+        return
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             content = file.read()

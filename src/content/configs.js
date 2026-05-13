@@ -5,7 +5,7 @@ export const postsPerPage = 10;
 
 export const defaultHeaderLinks = [
     { name: "صفحه اصلی", link: "/" },
-    { name: "گروه‌ها", link: "/groups" },
+    { name: "نهادها", link: "/groups" },
     { name: "احزاب و سازمان‌های سیاسی", link: "/parties" },
     { name: "گراف", link: "/graph" },
     { name: "همکاری", link: "/p/collaborate" },

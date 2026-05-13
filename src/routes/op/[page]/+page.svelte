@@ -44,6 +44,9 @@
         x:         socialUrl(m.social_x,         'https://x.com/'),
         facebook:  socialUrl(m.social_facebook,  'https://facebook.com/'),
         youtube:   socialUrl(m.social_youtube,   'https://youtube.com/'),
+        bluesky:   socialUrl(m.social_bluesky,   'https://bsky.app/profile/'),
+        linkedin:  socialUrl(m.social_linkedin,  'https://linkedin.com/'),
+        tiktok:    socialUrl(m.social_tiktok,    'https://tiktok.com/@'),
         web:       defined(m.internetAddress) && m.internetAddress.startsWith('http') ? m.internetAddress : null,
     };
 
@@ -240,7 +243,7 @@
                         <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">مرامنامه یا مانیفست</h2>
                         <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
                             {#if defined(m.coc) || defined(m.manifest)}
-                                {#if defined(m.coc)}{m.coc}{/if}{#if defined(m.coc) && defined(m.manifest)}<br />{/if}{#if defined(m.manifest)}{m.manifest}{/if}
+                                {#if defined(m.coc)}{#if m.coc.startsWith('http')}<a href={m.coc} target="_blank" rel="noopener noreferrer" class="underline hover:text-[#1E3A6B]">{m.coc}</a>{:else}{m.coc}{/if}{/if}{#if defined(m.coc) && defined(m.manifest)}<br />{/if}{#if defined(m.manifest)}{#if m.manifest.startsWith('http')}<a href={m.manifest} target="_blank" rel="noopener noreferrer" class="underline hover:text-[#1E3A6B]">{m.manifest}</a>{:else}{m.manifest}{/if}{/if}
                             {:else}
                                 —
                             {/if}
@@ -336,7 +339,31 @@
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
                                 >یوتیوب</a>
                             {/if}
-                            {#if !links.web && !links.telegram && !links.instagram && !links.x && !links.facebook && !links.youtube}
+                            {#if links.bluesky}
+                                <a
+                                    href={links.bluesky}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >بلواسکای</a>
+                            {/if}
+                            {#if links.linkedin}
+                                <a
+                                    href={links.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >لینکدین</a>
+                            {/if}
+                            {#if links.tiktok}
+                                <a
+                                    href={links.tiktok}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#EDE3C7] text-[#1E3A6B] text-xs font-medium hover:bg-[#d6cdb0] transition-colors"
+                                >تیک‌تاک</a>
+                            {/if}
+                            {#if !links.web && !links.telegram && !links.instagram && !links.x && !links.facebook && !links.youtube && !links.bluesky && !links.linkedin && !links.tiktok}
                                 <span class="text-xs text-[rgba(30,58,107,0.4)]">—</span>
                             {/if}
                         </div>

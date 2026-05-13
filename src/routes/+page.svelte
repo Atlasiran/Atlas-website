@@ -1,6 +1,6 @@
 <script>
     import { base, assets } from "$app/paths";
-    import Logo from "$lib/icons/Logo.svelte";
+    import GovernanceGlobe from "$lib/icons/GovernanceGlobe.svelte";
     import ArrowLeft from "lucide-svelte/icons/arrow-left";
     import ChartNetwork from "lucide-svelte/icons/chart-network";
     import Handshake from "lucide-svelte/icons/handshake";
@@ -49,8 +49,8 @@
             پروژه‌ی نقشه‌برداری جامعه مدنی
         </div>
 
-        <div class="w-20 h-20 hero-logo">
-            <Logo />
+        <div class="hero-globe">
+            <GovernanceGlobe />
         </div>
 
         <h1 class="hero-h1">اطلس جامعه مدنی ایران</h1>
@@ -60,7 +60,7 @@
         </p>
 
         <div class="flex flex-row flex-wrap gap-3 justify-center">
-            <a href="{base}/groups" class="btn-primary">کاوش گروه‌ها</a>
+            <a href="{base}/groups" class="btn-primary">کاوش نهادها</a>
             <a href="{base}/p/about-us" class="btn-outline">درباره اطلس</a>
         </div>
     </div>
@@ -75,7 +75,7 @@
         <a href="{base}/groups" class="nav-strip-card">
             <Users class="nav-strip-icon" />
             <div>
-                <div class="nav-strip-title">گروه‌ها</div>
+                <div class="nav-strip-title">نهادها</div>
                 <p class="nav-strip-desc">سازمان‌های مدنی و اجتماعی</p>
             </div>
             <ArrowLeft class="nav-strip-arrow" />
@@ -188,6 +188,12 @@
 
     .hero-logo {
         opacity: 0.9;
+    }
+
+    .hero-globe {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
     }
 
     .hero-h1 {
