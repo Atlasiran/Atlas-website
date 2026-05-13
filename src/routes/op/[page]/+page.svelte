@@ -254,7 +254,11 @@
                     <div class="mb-4">
                         <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">درباره</h2>
                         <p class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed">
-                            {m.about || "—"}
+                            {#if m.about && m.about.startsWith('http')}
+                                <a href={m.about} target="_blank" rel="noopener noreferrer" class="underline hover:text-[#1E3A6B]">{m.about}</a>
+                            {:else}
+                                {m.about || "—"}
+                            {/if}
                         </p>
                     </div>
 

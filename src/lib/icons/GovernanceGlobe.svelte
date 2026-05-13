@@ -508,10 +508,4 @@
     on:pointerleave={handlePointerLeave}
     on:click={handleClick}
   ></canvas>
-
-  {#if pinnedIdx !== null}
-    <p class="mt-1 text-center select-none" style="color:#64748b;font-size:0.72rem">
-      برای رها کردن <kbd style="background:rgba(0,0,0,0.06);border-radius:3px;padding:1px 5px">Esc</kbd> بزنید
-    </p>
-  {/if}
 </div>

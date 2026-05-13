@@ -173,8 +173,9 @@
                     >
                         <div class="flex-1 space-y-1 w-full">
                             <p dir="auto" class="about">
-                                {truncateString(about, 100) ||
-                                    "توضیحاتی در دسترس نیست"}
+                                {#if about && !about.startsWith('http')}
+                                    {truncateString(about, 100)}
+                                {/if}
                             </p>
                         </div>
                     </div>
