@@ -9,6 +9,7 @@
     import { Play } from "lucide-svelte";
     import ShowNodeBar from "@/components/ShowNodeBar.svelte";
     import { base } from "$app/paths";
+    import { goto } from "$app/navigation";
 
     let container: HTMLElement;
     let renderer: Sigma;
@@ -107,10 +108,19 @@
 
             selectTimeout = setTimeout(() => {
                 selectTimeout = null;
+
+                const data = renderer.getGraph().getNodeAttributes(e.node);
+
+                // Org nodes: navigate to their profile page
+                if (data["pageLink"]) {
+                    goto(base + data["pageLink"]);
+                    return;
+                }
+
+                // Country nodes: open the sidebar showing connected orgs
                 isSideOpen = true;
 
                 _subgraph = [];
-                const data = renderer.getGraph().getNodeAttributes(e.node);
                 _subgraph.push(data);
 
                 renderer.getGraph().forEachNeighbor(e.node, (neighbor) => {

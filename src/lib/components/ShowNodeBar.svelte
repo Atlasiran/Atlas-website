@@ -5,6 +5,8 @@
     import { Graph } from "graphology";
     import { onMount } from "svelte";
     import ForceAtlas2 from "graphology-layout-forceatlas2";
+    import { goto } from "$app/navigation";
+    import { base } from "$app/paths";
 
     export let subgraph;
     export let closePanel = () => {};
@@ -45,6 +47,15 @@
             maxCameraRatio: 10,
             defaultNodeType: "circle",
             defaultNodeColor: "#ccc",
+        });
+
+        // Navigate to org profile when an org node is clicked
+        renderer.on("clickNode", (e) => {
+            const data = renderer.getGraph().getNodeAttributes(e.node);
+            const pageLink = data.attributes?.pageLink;
+            if (pageLink) {
+                goto(base + pageLink);
+            }
         });
 
         // Node reducer
