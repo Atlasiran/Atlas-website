@@ -269,15 +269,28 @@
                             {#if defined(m.coc) || defined(m.manifest)}
                                 {#if defined(m.coc)}
                                     {#if m.coc.startsWith("http")}
-                                        <a href={m.coc} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70">مشاهده سند ↗</a>
+                                        <a
+                                            href={m.coc}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70"
+                                            >مشاهده سند ↗</a
+                                        >
                                     {:else}
                                         {m.coc}
                                     {/if}
                                 {/if}
-                                {#if defined(m.coc) && defined(m.manifest)}<br />{/if}
+                                {#if defined(m.coc) && defined(m.manifest)}<br
+                                    />{/if}
                                 {#if defined(m.manifest)}
                                     {#if m.manifest.startsWith("http")}
-                                        <a href={m.manifest} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70">مشاهده سند ↗</a>
+                                        <a
+                                            href={m.manifest}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70"
+                                            >مشاهده سند ↗</a
+                                        >
                                     {:else}
                                         {m.manifest}
                                     {/if}
@@ -297,7 +310,13 @@
                             class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
                         >
                             {#if m.about && m.about.startsWith("http")}
-                                <a href={m.about} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70">مشاهده ↗</a>
+                                <a
+                                    href={m.about}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70"
+                                    >مشاهده ↗</a
+                                >
                             {:else}
                                 {m.about || "—"}
                             {/if}
