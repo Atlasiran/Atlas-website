@@ -252,7 +252,7 @@
                             تخصص‌ها
                         </h2>
                         <p
-                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed break-words"
                         >
                             {m.expertise || "—"}
                         </p>
@@ -264,7 +264,7 @@
                             مرامنامه یا مانیفست
                         </h2>
                         <p
-                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed break-words"
                         >
                             {#if defined(m.coc) || defined(m.manifest)}
                                 {#if defined(m.coc)}
@@ -307,7 +307,7 @@
                             درباره
                         </h2>
                         <p
-                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed break-words"
                         >
                             {#if m.about && m.about.startsWith("http")}
                                 <a
@@ -329,7 +329,7 @@
                             تاریخچه
                         </h2>
                         <p
-                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed"
+                            class="text-[rgba(30,58,107,0.72)] text-sm leading-relaxed break-words"
                         >
                             {m.history || "—"}
                         </p>
