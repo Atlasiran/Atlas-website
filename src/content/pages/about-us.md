@@ -1,7 +1,7 @@
 ---
 title: "درباره‌ی ما"
 date: "2023-10-26"
-updated: "2024-08-23"
+updated: "2026-05-14"
 headerBg: "background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);"
 
 ---
