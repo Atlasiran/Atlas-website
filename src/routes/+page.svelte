@@ -117,7 +117,6 @@
         class="max-w-5xl mx-auto px-6 py-24 sm:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start"
     >
         <div class="flex flex-col gap-5">
-            <div class="section-label">درباره اطلس</div>
             <h2 class="section-title">اطلس جامعه مدنی ایران چیست؟</h2>
             <p class="section-body">
                 اطلس جامعه مدنی ایران پروژه‌ای است که با هدف توانمندسازی
@@ -148,7 +147,6 @@
         class="max-w-5xl mx-auto px-6 py-24 sm:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
     >
         <div class="flex flex-col gap-5">
-            <div class="section-label">همکاری</div>
             <h2 class="section-title">چگونه همکاری کنیم؟</h2>
             <p class="section-body">
                 پروژه اطلس بر همکاری استوار است. اگر شما نیز به توانمندسازی
