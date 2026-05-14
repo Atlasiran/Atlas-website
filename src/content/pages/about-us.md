@@ -6,7 +6,7 @@ headerBg: "background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);"
 
 ---
 
-اطلس جامعه مدنی ایرانیان پروژه‌ای است که از سوی [Transnational Community Federation eV](https://transcf.org/about-us/) با هدف توانمندسازی جوامع از راه همکاری، هدایت می‌شود. ماموریت تیم اطلس تقویت صدای فعالان ایرانی است.
+اطلس جامعه مدنی ایرانیان پروژه‌ای است که از سوی [Transnational Community Federation eV](https://transcf.org/about-us/) با هدف توانمندسازی جوامع از راه همکاری هدایت می‌شود. ماموریت تیم اطلس تقویت صدای فعالان ایرانی است.
 
 ---
 

@@ -1,17 +1,15 @@
 <script>
+    import LogoutModal from "$lib/components/LogoutModal.svelte";
     import { Button } from "$lib/components/ui/button";
+    import { authStore } from "$lib/stores/authStore";
     import LogInIcon from "lucide-svelte/icons/log-in";
     import LogOutIcon from "lucide-svelte/icons/log-out";
-    import LogoutModal from "$lib/components/LogoutModal.svelte";
-    import { supabase } from "$lib/supabaseClient";
     import { onMount } from "svelte";
-    import { authStore } from "$lib/stores/authStore";
 
     export let short = false;
-    
+
     let openLogoutModal = false;
     let user = null;
-    
 
     function onOpenChange(modal) {
         if (modal === "logout") {

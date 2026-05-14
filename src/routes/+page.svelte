@@ -57,7 +57,9 @@
 
         <div class="flex flex-row flex-wrap gap-3 justify-center">
             <a href="{base}/groups" class="btn-primary">کاوش نهادها</a>
-            <a href="{base}/parties" class="btn-primary">کاوش سازمان‌های سیاسی و احزاب</a>
+            <a href="{base}/parties" class="btn-primary"
+                >کاوش سازمان‌های سیاسی و احزاب</a
+            >
             <a href="{base}/p/about-us" class="btn-outline">درباره اطلس</a>
         </div>
 
