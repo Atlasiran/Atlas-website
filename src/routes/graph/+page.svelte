@@ -247,6 +247,7 @@
 <div class="graph-view">
     <div
         class="sidebar flex flex-col"
+        class:sidebar-open={isSideOpen}
         style="width:{isSideOpen ? '400px' : '0px'}"
     >
         <ShowNodeBar {closePanel} subgraph={_subgraph} />
@@ -288,12 +289,16 @@
         height: 100%;
         background-color: #EDE3C7;
         border-left: 1px solid rgba(30, 58, 107, 0.08);
+        overflow: hidden;
+    }
+    .sidebar.sidebar-open {
+        overflow-y: auto;
     }
     .graph-view {
         width: 100vw;
         display: flex;
         flex-direction: row;
-        height: calc(100vh - 50px);
+        height: calc(100dvh - 56px);
     }
 
     .zoom-controls {
@@ -304,6 +309,20 @@
         flex-direction: column;
         gap: 8px;
         z-index: 20;
+    }
+
+    /* Mobile: sidebar becomes a fixed full-screen overlay when open */
+    @media (max-width: 639px) {
+        .sidebar.sidebar-open {
+            position: fixed;
+            inset: 56px 0 0 0;
+            width: 100vw !important;
+            height: calc(100dvh - 56px);
+            z-index: 50;
+        }
+        .graph-container {
+            width: 100vw !important;
+        }
     }
 
     /* Add custom node styles */
