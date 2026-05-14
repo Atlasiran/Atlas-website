@@ -60,7 +60,7 @@
             <a href="{base}/p/about-us" class="btn-outline">درباره اطلس</a>
         </div>
 
-        <div class="hero-globe">
+        <div class="hero-globe pointer-events-none sm:pointer-events-auto">
             <GovernanceGlobe />
         </div>
     </div>
