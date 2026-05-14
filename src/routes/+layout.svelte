@@ -1,17 +1,14 @@
 <script>
-    import { fly } from "svelte/transition";
     import { cubicIn, cubicOut } from "svelte/easing";
+    import { fly } from "svelte/transition";
 
-    import Transition from "$lib/components/layout/Transition.svelte";
-    import Header from "$lib/components/layout/Header.svelte";
     import Footer from "$lib/components/layout/Footer.svelte";
-    import { onMount } from "svelte";
-    import { supabase } from "$lib/supabaseClient";
-    import { authStore } from "$lib/stores/authStore";
-    import { siteTitle, siteName, siteDescription } from "../content/configs";
+    import Header from "$lib/components/layout/Header.svelte";
     import { Toaster } from "$lib/components/ui/sonner";
-    import { toast } from "svelte-sonner";
-    import { base, assets } from "$app/paths";
+    import { authStore } from "$lib/stores/authStore";
+    import { supabase } from "$lib/supabaseClient";
+    import { onMount } from "svelte";
+    import { siteDescription, siteName, siteTitle } from "../content/configs";
 
     import "../app.css";
     export let data = {};
@@ -78,8 +75,13 @@
     <Header />
 
     <!-- Review banner -->
-    <div class="w-full bg-[#EDE3C7] text-[#1E3A6B] text-sm text-center py-2 px-4 leading-relaxed" dir="rtl">
-        داده‌های نسخه‌ی تازه‌ی اطلس (۰.۲.۰) برای مدت یک‌ماه برای بازبینی در دسترس همگان قرار دارند. لطفن ایرادات را از راهی که در برگه‌ی هر نهاد آمده برای ما بفرستید.
+    <div
+        class="w-full bg-[#EDE3C7] text-[#1E3A6B] text-sm text-center py-2 px-4 leading-relaxed"
+        dir="rtl"
+    >
+        داده‌های نسخه‌ی تازه‌ی اطلس (۰.۲.۰) برای مدت یک‌ماه برای بازبینی در
+        دسترس همگان قرار دارند. لطفن ایرادات را از راهی که در برگه‌ی هر نهاد
+        آمده برای ما بفرستید.
     </div>
 
     <main class="mb-auto">

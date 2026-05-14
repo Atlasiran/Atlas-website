@@ -1,15 +1,15 @@
 <script lang="ts">
-    import Sigma from "sigma";
-    import Graph from "graphology";
-    import { onMount } from "svelte";
+    import { goto } from "$app/navigation";
+    import { base } from "$app/paths";
     import { Button } from "$lib/components/ui/button/index";
-    import Minus from "lucide-svelte/icons/minus";
-    import Plus from "lucide-svelte/icons/plus";
+    import ShowNodeBar from "@/components/ShowNodeBar.svelte";
+    import Graph from "graphology";
     import ForceAtlas2 from "graphology-layout-forceatlas2";
     import { Play } from "lucide-svelte";
-    import ShowNodeBar from "@/components/ShowNodeBar.svelte";
-    import { base } from "$app/paths";
-    import { goto } from "$app/navigation";
+    import Minus from "lucide-svelte/icons/minus";
+    import Plus from "lucide-svelte/icons/plus";
+    import Sigma from "sigma";
+    import { onMount } from "svelte";
 
     let container: HTMLElement;
     let renderer: Sigma;
@@ -124,7 +124,9 @@
                 _subgraph.push(data);
 
                 renderer.getGraph().forEachNeighbor(e.node, (neighbor) => {
-                    const data = renderer.getGraph().getNodeAttributes(neighbor);
+                    const data = renderer
+                        .getGraph()
+                        .getNodeAttributes(neighbor);
                     _subgraph.push(data);
                 });
             }, 200);
@@ -281,13 +283,16 @@
     .graph-container {
         height: 100%;
         position: relative;
-        background-color: #F4F6F7;
-        background-image: radial-gradient(rgba(30, 58, 107, 0.12) 1px, transparent 1px);
+        background-color: #f4f6f7;
+        background-image: radial-gradient(
+            rgba(30, 58, 107, 0.12) 1px,
+            transparent 1px
+        );
         background-size: 20px 20px;
     }
     .sidebar {
         height: 100%;
-        background-color: #EDE3C7;
+        background-color: #ede3c7;
         border-left: 1px solid rgba(30, 58, 107, 0.08);
         overflow: hidden;
     }
@@ -327,12 +332,12 @@
 
     /* Add custom node styles */
     .graph-container .highlighted {
-        fill: #0EBB90;
-        stroke: #0EBB90;
+        fill: #0ebb90;
+        stroke: #0ebb90;
     }
 
     .graph-container .highlighted-neighbor {
-        fill: #8CDAF5;
-        stroke: #8CDAF5;
+        fill: #8cdaf5;
+        stroke: #8cdaf5;
     }
 </style>
