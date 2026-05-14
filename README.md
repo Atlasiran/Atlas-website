@@ -33,6 +33,27 @@ npm run build        # runs md_to_json.py then Vite build
 npm run preview      # preview the production build locally
 ```
 
+## Data Pipeline
+
+The source of truth is a CSV file in `data/`. When new data arrives:
+
+1. **`python3 deploy/csv_to_json.py`** — reads the CSV and writes:
+   - `static/data/data.json` — all 226+ orgs (civil + political)
+   - `static/data/political_parties.json` — political orgs only (used by `/parties/`)
+
+2. **`python3 deploy/update_org_pages.py`** — syncs `data.json` → `src/content/org-pages/*.md`
+
+3. **`npm run build`** — runs `deploy/md_to_json.py` (frontmatter → `data.json`) then Vite
+
+### Org-type split: نهادها vs احزاب
+
+The following `org_type` values are political and appear at `/parties/`:
+- `حزب`
+- `سازمان سیاسی`
+- `شورا / کنگره / ائتلاف`
+
+All other types are civil society and appear at `/groups/`.
+
 ## Adding or Updating an Organization
 
 Each organization is a single `.md` file in `src/content/org-pages/` with YAML frontmatter:
@@ -40,32 +61,40 @@ Each organization is a single `.md` file in `src/content/org-pages/` with YAML f
 ```yaml
 ---
 id: "123"
-org_type: "ORG"          # ORG | H_ORG | NGO | PARTY | رسانه | پروژه | گوناگون
+org_type: "سازمان غیرانتفاعی"   # e.g. حزب | سازمان سیاسی | سازمان غیرانتفاعی | رسانه | پروژه | ...
+pageLink: "/op/slug"
+logo: "logos/{id}.png"
 name_fa: "نام فارسی"
 name_en: "English Name"
 name_short: ""
 name_local: ""           # Kurdish / Balochi / Arabic etc.
 location: ""
+post_location: ""
 contact: ""              # email or other contact info
+phone: ""
 about: ""
 expertise: ""
 history: ""
 manifest: ""
 coc: ""                  # code of conduct / مرام‌نامه
-political_orientation: ""
 estimation_of_members: ""
+political_orientation: ""
 social_telegram: ""
 social_instagram: ""
 social_x: ""
 social_facebook: ""
 social_youtube: ""
+social_bluesky: ""
+social_linkedin: ""
+social_tiktok: ""
 internetAddress: ""
-logo: "logos/{id}.png"
+headerBg: ""
+created_at: ""
 updated_at: ""
 ---
 ```
 
-After adding or editing files, run `npm run build` to regenerate `static/data/data.json`.
+After editing files manually, run `npm run build` to regenerate `static/data/data.json`.
 
 ## OG Images (social preview images)
 
@@ -74,38 +103,52 @@ OG images for org pages are pre-generated locally and committed to `static/og/op
 Regenerate after adding or updating org pages:
 
 ```bash
-npm run gen:og                  # regenerate all org OG images
-npm run gen:og -- Hengaw        # regenerate a single org by slug
+npm run gen:og
 git add static/og/op/ && git commit -m "chore: regenerate OG images"
 ```
 
-Requires Python 3 with `Pillow`, `arabic-reshaper`, `python-bidi`, `PyYAML` (the script installs them automatically).
+Requires Python 3 with `Pillow`, `arabic-reshaper`, `python-bidi`, `PyYAML` (the script installs them automatically via `pip3`).
+
+## Network Graph
+
+The graph at `/graph` reads `static/test.gexf`. Regenerate it after data changes:
+
+```bash
+python3 deploy/gen_gexf.py
+```
 
 ## Project Structure
 
 ```
+data/
+  *.csv                       ← source-of-truth CSV from the Atlas database
 src/
   routes/
-    op/[page]/      ← individual org pages
-    p/[page]/       ← political-party pages
-    parties/        ← party listing
-    groups/         ← groups listing
-    graph/          ← network graph view
-    blog/           ← blog posts
-    api/            ← JSON API endpoints
+    op/[page]/                ← individual org pages (civil + political)
+    p/[page]/                 ← static content pages (about, contact, etc.)
+    parties/                  ← political orgs listing
+    groups/                   ← civil society listing (نهادها)
+    graph/                    ← network graph view
+    blog/                     ← blog posts
+    api/                      ← JSON API endpoints
   lib/
-    components/     ← shared Svelte components
+    components/               ← shared Svelte components
   content/
-    org-pages/      ← one .md file per organization
-    posts/          ← blog posts
+    org-pages/                ← one .md file per organization
+    pages/                    ← static content pages
+    posts/                    ← blog posts
 static/
-  data/data.json    ← generated at build time
-  logos/            ← org logos ({id}.png)
-  og/op/            ← pre-generated OG images
+  data/data.json              ← all orgs; regenerated at build time
+  data/political_parties.json ← political orgs only; used by /parties/
+  logos/                      ← org logos ({id}.png)
+  og/op/                      ← pre-generated OG images
 deploy/
-  md_to_json.py         ← frontmatter → data.json
-  gen_org_og_images.py  ← generates OG images
-  update_db.py          ← Supabase sync script
+  csv_to_json.py      ← CSV → data.json + political_parties.json
+  update_org_pages.py ← data.json → src/content/org-pages/*.md
+  md_to_json.py       ← frontmatter → data.json (run at build time)
+  gen_gexf.py         ← data.json → static/test.gexf (network graph)
+  gen_org_og_images.py← generates OG images
+  update_db.py        ← Supabase sync script
 ```
 
 ## Licence

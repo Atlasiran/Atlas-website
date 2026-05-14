@@ -2,7 +2,6 @@
     import { Button } from "$lib/components/ui/button";
     import LogInIcon from "lucide-svelte/icons/log-in";
     import LogOutIcon from "lucide-svelte/icons/log-out";
-    import LoginModal from "$lib/components/LoginModal.svelte";
     import LogoutModal from "$lib/components/LogoutModal.svelte";
     import { supabase } from "$lib/supabaseClient";
     import { onMount } from "svelte";
@@ -10,15 +9,12 @@
 
     export let short = false;
     
-    let openLoginModal = false;
     let openLogoutModal = false;
     let user = null;
     
 
     function onOpenChange(modal) {
-        if (modal === "login") {
-            openLoginModal = false;
-        } else if (modal === "logout") {
+        if (modal === "logout") {
             openLogoutModal = false;
         }
     }
@@ -41,17 +37,13 @@
         {/if}
     </Button>
 {:else}
-    <LoginModal bind:open={openLoginModal} {onOpenChange} />
-
-    <Button
-        class="text-[rgba(30,58,107,0.56)] mt-2"
-        on:click={() => (openLoginModal = true)}
-        variant="secondary"
-        size="sm"
+    <a
+        href="https://atlasiran.org/admin"
+        class="inline-flex items-center text-[rgba(30,58,107,0.56)] mt-2 px-3 py-1.5 rounded-md bg-secondary text-sm font-medium hover:bg-secondary/80 transition-colors"
     >
         <LogInIcon class="w-4 h-4  {short ? '' : 'ml-2'}" />
         {#if !short}
             ورود به سیستم
         {/if}
-    </Button>
+    </a>
 {/if}
