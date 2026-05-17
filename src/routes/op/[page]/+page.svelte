@@ -345,7 +345,7 @@
                         class="mt-10 pt-6 border-t border-[rgba(30,58,107,0.12)] flex flex-col sm:flex-row sm:items-center gap-3"
                     >
                         <p class="text-sm text-[rgba(30,58,107,0.55)] flex-1">
-                            آیا اطلاعاتی در این صفحه نادرست است؟ می‌توانید
+                            آیا اطلاعاتی در این صفحه نادرست یا ناکامل است؟ می‌توانید
                             درخواست ویرایش ارسال کنید.
                         </p>
                         <a
