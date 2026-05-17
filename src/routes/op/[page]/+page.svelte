@@ -59,9 +59,9 @@
         return v && v !== "None" && v.trim() !== "";
     }
 
-    const SITE_URL = "https://atlasiran.org";
+    const SITE_URL = "https://AtlasIran.org";
     const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
-    const REPORT_EMAIL = "hi@atlasiran.org";
+    const REPORT_EMAIL = "hi@AtlasIran.org";
 
     const ogTitle = [orgName, "اطلس جامعه مدنی ایران"]
         .filter(Boolean)

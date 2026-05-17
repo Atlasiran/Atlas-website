@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate per-org OG social preview images (1200×630) for atlasiran.org.
+Generate per-org OG social preview images (1200×630) for AtlasIran.org.
 
 Reads all .md frontmatter from src/content/org-pages/ and outputs
 static/og/op/{slug}.jpg for each.
@@ -18,27 +18,27 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 import arabic_reshaper
 from bidi.algorithm import get_display
 
-BASE     = Path(__file__).parent.parent
-ORG_DIR  = BASE / "src/content/org-pages"
+BASE = Path(__file__).parent.parent
+ORG_DIR = BASE / "src/content/org-pages"
 LOGO_DIR = BASE / "static/logos"
-OUT_DIR  = BASE / "static/og/op"
+OUT_DIR = BASE / "static/og/op"
 
 # Use Shabnam-FD (pre-composed Arabic Presentation Forms) — works with PIL's basic
 # freetype renderer on Linux (Cloudflare). Vazirmatn uses OpenType GSUB which PIL
 # does not apply on Linux, causing broken unjoined letters.
 FONT_BOLD = BASE / "static/fonts/shabnam/Shabnam-Bold-FD.ttf"
-FONT_REG  = BASE / "static/fonts/shabnam/Shabnam-FD.ttf"
+FONT_REG = BASE / "static/fonts/shabnam/Shabnam-FD.ttf"
 if not FONT_BOLD.exists():
     FONT_BOLD = BASE / "static/fonts/vazirmatn/Vazirmatn-Bold.ttf"
-    FONT_REG  = BASE / "static/fonts/vazirmatn/Vazirmatn-Regular.ttf"
+    FONT_REG = BASE / "static/fonts/vazirmatn/Vazirmatn-Regular.ttf"
 
 W, H = 1200, 630
 
-NAVY      = (30,  58,  107)
+NAVY = (30,  58,  107)
 NAVY_DARK = (18,  36,  72)
-WHITE     = (244, 246, 247)
-SKY       = (140, 218, 245)
-GOLD      = (237, 227, 199)
+WHITE = (244, 246, 247)
+SKY = (140, 218, 245)
+GOLD = (237, 227, 199)
 
 
 # ── helpers ────────────────────────────────────────────────────────────────
@@ -46,7 +46,8 @@ GOLD      = (237, 227, 199)
 def is_rtl(text: str) -> bool:
     if not text:
         return False
-    rtl = sum(1 for c in text if '\u0600' <= c <= '\u06FF' or '\u0750' <= c <= '\u077F')
+    rtl = sum(1 for c in text if '\u0600' <= c <=
+              '\u06FF' or '\u0750' <= c <= '\u077F')
     return rtl > len(text) * 0.25
 
 
@@ -116,28 +117,34 @@ def defined(v) -> bool:
 def circle_logo(path: Path, size: int):
     try:
         img = Image.open(path).convert("RGBA")
-        img = ImageOps.fit(img, (size, size), method=Image.LANCZOS)
+        # Shrink to fit entirely within the circle, preserving aspect ratio
+        img.thumbnail((size, size), Image.LANCZOS)
+        # Centre on a transparent square canvas
+        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        x = (size - img.width) // 2
+        y = (size - img.height) // 2
+        canvas.paste(img, (x, y), img)
         mask = Image.new("L", (size, size), 0)
         ImageDraw.Draw(mask).ellipse((0, 0, size, size), fill=255)
-        img.putalpha(mask)
-        return img
+        canvas.putalpha(mask)
+        return canvas
     except Exception:
         return None
 
 
 def building_icon_circle(size: int) -> Image.Image:
     """Render a building silhouette (matching the UI Building2 icon) in a circle."""
-    img  = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
     # circle background — same muted navy-blue as the UI placeholder
-    BG   = (168, 178, 200, 255)   # ~#A8B2C8
+    BG = (168, 178, 200, 255)   # ~#A8B2C8
     ICON = (255, 255, 255, 220)
 
     draw.ellipse([0, 0, size - 1, size - 1], fill=BG)
 
     # scale-independent drawing grid
-    m  = size * 0.18   # margin
+    m = size * 0.18   # margin
     cx = size / 2
 
     # main building body (tall rectangle)
@@ -194,18 +201,25 @@ def parse_frontmatter(md_path: Path) -> dict:
 # ── image generator ────────────────────────────────────────────────────────
 
 def generate(m: dict, out_path: Path) -> None:
-    slug     = out_path.stem
+    slug = out_path.stem
     org_name = (m.get('name_fa') or m.get('name_en') or
                 m.get('name_short') or m.get('title') or slug)
-    location   = str(m.get('location',   '') or '')
-    org_type   = str(m.get('org_type',   '') or '')
-    expertise  = str(m.get('expertise',  '') or '')
-    about      = str(m.get('about',      '') or '')
-    logo_file  = str(m.get('logo',       '') or '')
+    location = str(m.get('location',        '') or '')
+    org_type = str(m.get('org_type',        '') or '')
+    expertise = str(m.get('expertise',       '') or '')
+    about = str(m.get('about',           '') or '')
+    internet_address = str(m.get('internetAddress', '') or '')
+    logo_file = str(m.get('logo',            '') or '')
+
+    # Strip protocol for a clean display URL
+    def clean_url(u: str) -> str:
+        return re.sub(r'^https?://', '', u).rstrip('/')
 
     description = ''
-    if defined(about):
+    if defined(about) and not about.strip().startswith('http'):
         description = about
+    elif defined(internet_address):
+        description = clean_url(internet_address)
     else:
         seen = set()
         parts = []
@@ -217,12 +231,13 @@ def generate(m: dict, out_path: Path) -> None:
 
     # ── canvas ──────────────────────────────────────────────────
     canvas = Image.new("RGB", (W, H), NAVY)
-    draw   = ImageDraw.Draw(canvas)
+    draw = ImageDraw.Draw(canvas)
 
     # subtle right-side darkening
     for x in range(W // 2, W):
         alpha = int(40 * ((x - W // 2) / (W // 2)))
-        draw.line([(x, 0), (x, H)], fill=tuple(max(0, c - alpha) for c in NAVY))
+        draw.line([(x, 0), (x, H)], fill=tuple(max(0, c - alpha)
+                  for c in NAVY))
 
     # decorative concentric arcs top-right
     arc_cx, arc_cy = 1050, -60
@@ -232,7 +247,8 @@ def generate(m: dict, out_path: Path) -> None:
             [arc_cx - radius, arc_cy - radius, arc_cx + radius, arc_cy + radius],
             outline=(*GOLD, opacity), width=2
         )
-        canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), arc_layer).convert("RGB"))
+        canvas.paste(Image.alpha_composite(
+            canvas.convert("RGBA"), arc_layer).convert("RGB"))
 
     draw = ImageDraw.Draw(canvas)
 
@@ -240,17 +256,17 @@ def generate(m: dict, out_path: Path) -> None:
     draw.rectangle([56, 64, 62, H - 64], fill=GOLD)
 
     # ── fonts ────────────────────────────────────────────────────
-    f_name_lg  = ImageFont.truetype(str(FONT_BOLD), 64)
-    f_name_sm  = ImageFont.truetype(str(FONT_BOLD), 44)
-    f_meta     = ImageFont.truetype(str(FONT_REG),  28)
-    f_desc     = ImageFont.truetype(str(FONT_REG),  24)
-    f_brand_b  = ImageFont.truetype(str(FONT_BOLD), 22)
-    f_brand    = ImageFont.truetype(str(FONT_REG),  21)
+    f_name_lg = ImageFont.truetype(str(FONT_BOLD), 64)
+    f_name_sm = ImageFont.truetype(str(FONT_BOLD), 44)
+    f_meta = ImageFont.truetype(str(FONT_REG),  28)
+    f_desc = ImageFont.truetype(str(FONT_REG),  24)
+    f_brand_b = ImageFont.truetype(str(FONT_BOLD), 22)
+    f_brand = ImageFont.truetype(str(FONT_REG),  21)
 
     # ── org logo ─────────────────────────────────────────────────
     LOGO_SIZE = 220
-    LOGO_PAD  = 18
-    logo_img  = None
+    LOGO_PAD = 18
+    logo_img = None
 
     PLACEHOLDER = "temporary.png"
     is_real_logo = (defined(logo_file)
@@ -266,8 +282,9 @@ def generate(m: dict, out_path: Path) -> None:
 
     if logo_img:
         bg_sz = LOGO_SIZE + LOGO_PAD * 2
-        bg    = Image.new("RGBA", (bg_sz, bg_sz), (0, 0, 0, 0))
-        ImageDraw.Draw(bg).ellipse([0, 0, bg_sz, bg_sz], fill=(255, 255, 255, 220))
+        bg = Image.new("RGBA", (bg_sz, bg_sz), (0, 0, 0, 0))
+        ImageDraw.Draw(bg).ellipse(
+            [0, 0, bg_sz, bg_sz], fill=(255, 255, 255, 220))
         canvas.paste(bg.convert("RGB"), (862 - LOGO_PAD, 150 - LOGO_PAD),
                      bg.split()[3])
         canvas.paste(logo_img.convert("RGB"), (862, 150),
@@ -275,15 +292,15 @@ def generate(m: dict, out_path: Path) -> None:
         draw = ImageDraw.Draw(canvas)
 
     # ── text layout ──────────────────────────────────────────────
-    TEXT_X   = 90
+    TEXT_X = 90
     TEXT_MAX = 720 if logo_img else 1040
 
-    name_font  = f_name_lg if len(org_name) <= 32 else f_name_sm
+    name_font = f_name_lg if len(org_name) <= 32 else f_name_sm
     name_lines = wrap_text(org_name, name_font, TEXT_MAX, draw, max_lines=2)
 
-    LINE_NAME  = 80 if name_font == f_name_lg else 60
-    LINE_META  = 42
-    LINE_DESC  = 36
+    LINE_NAME = 80 if name_font == f_name_lg else 60
+    LINE_META = 42
+    LINE_DESC = 36
 
     has_meta = defined(location)
     has_desc = defined(description)
@@ -308,7 +325,8 @@ def generate(m: dict, out_path: Path) -> None:
 
     # description (max 2 lines)
     if has_desc:
-        desc_lines = wrap_text(description, f_desc, TEXT_MAX, draw, max_lines=2)
+        desc_lines = wrap_text(description, f_desc,
+                               TEXT_MAX, draw, max_lines=2)
         for dl in desc_lines:
             draw.text((TEXT_X, y), dl, font=f_desc, fill=(*WHITE, 175))
             y += LINE_DESC
@@ -318,10 +336,11 @@ def generate(m: dict, out_path: Path) -> None:
     draw.rectangle([0, bar_y, W, H], fill=NAVY_DARK)
 
     site_label = rtl_render("اطلس جامعه مدنی ایران")
-    draw.text((TEXT_X, bar_y + 18), site_label, font=f_brand_b, fill=(*GOLD, 220))
+    draw.text((TEXT_X, bar_y + 18), site_label,
+              font=f_brand_b, fill=(*GOLD, 220))
 
-    url_text = "atlasiran.org"
-    url_w    = draw.textlength(url_text, font=f_brand)
+    url_text = "AtlasIran.org"
+    url_w = draw.textlength(url_text, font=f_brand)
     draw.text((W - 60 - url_w, bar_y + 20), url_text,
               font=f_brand, fill=(*WHITE, 140))
 
@@ -348,8 +367,8 @@ def main():
 
     for i, md in enumerate(md_files, 1):
         slug = md.stem
-        out  = OUT_DIR / f"{slug}.jpg"
-        m    = parse_frontmatter(md)
+        out = OUT_DIR / f"{slug}.jpg"
+        m = parse_frontmatter(md)
         if not m:
             print(f"  skip (no frontmatter): {slug}")
             continue
@@ -360,7 +379,8 @@ def main():
             print(f"  [{i}/{len(md_files)}] ✗  {slug}: {e}")
             errors.append((slug, str(e)))
 
-    print(f"\nDone — {len(md_files) - len(errors)} generated, {len(errors)} errors.")
+    print(
+        f"\nDone — {len(md_files) - len(errors)} generated, {len(errors)} errors.")
     for s, e in errors:
         print(f"  ERROR: {s}: {e}")
 

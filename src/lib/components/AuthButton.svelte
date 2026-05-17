@@ -36,7 +36,7 @@
     </Button>
 {:else}
     <a
-        href="https://atlasiran.org/admin"
+        href="https://AtlasIran.org/admin"
         class="inline-flex items-center text-[rgba(30,58,107,0.56)] mt-2 px-3 py-1.5 rounded-md bg-secondary text-sm font-medium hover:bg-secondary/80 transition-colors"
     >
         <LogInIcon class="w-4 h-4  {short ? '' : 'ml-2'}" />

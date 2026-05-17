@@ -59,10 +59,10 @@
         <div>
             <b>نشانی روی اطلس:</b>
             <a
-                href={`https://atlasiran.github.io/Atlas-website/${pageLink}`}
+                href={`https://AtlasIran.github.io/Atlas-website/${pageLink}`}
                 class="text-blue-500"
                 dir="ltr"
-                >{`https://atlasiran.github.io/Atlas-website/${pageLink}`}</a
+                >{`https://AtlasIran.github.io/Atlas-website/${pageLink}`}</a
             >
         </div>
         <div>

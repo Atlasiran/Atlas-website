@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: Atlasiran/Atlas-website
+  repo: AtlasIran/Atlas-website
   branch: main
-  base_url: https://atlasiran-auth.atorkzaban.workers.dev
+  base_url: https://AtlasIran-auth.atorkzaban.workers.dev
 
 # Where uploaded logos are stored and served from
 media_folder: "static/logos"

@@ -2718,14 +2718,14 @@
         <viz:size value="1"/>
         <viz:position x="126.8417" y="-80.2485"/>
       </node>
-      <node id="1750cec0-acb8-5db0-8130-250dda3d8903" label="آزمایشگاه مدنی">
+      <node id="1750cec0-acb8-5db0-8130-250dda3d8903" label="فدراسیون جامعه‌ی تراملّی">
         <attvalues>
-          <attvalue for="name" value="آزمایشگاه مدنی"/>
+          <attvalue for="name" value="فدراسیون جامعه‌ی تراملّی"/>
           <attvalue for="@id" value="1750cec0-acb8-5db0-8130-250dda3d8903"/>
           <attvalue for="@typeId" value="org-type"/>
           <attvalue for="@labels" value="Organization"/>
           <attvalue for="English Name" value="Transnational Community Federation e. V."/>
-          <attvalue for="Full name" value="آزمایشگاه مدنی"/>
+          <attvalue for="Full name" value="فدراسیون جامعه‌ی تراملّی"/>
           <attvalue for="Location(s)" value="آلمان، اشتوتگارت"/>
           <attvalue for="About" value="https://transcf.org/fa/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%db%8c-%d9%85%d8%a7/"/>
           <attvalue for="مرامنامه و باورها و منشور" value="https://docs.google.com/document/d/1OPNCs0Ozuqu1SHkoinDzzPvO_-s-7T_X4lODVO9HO50/edit?tab=t.0#heading=h.ycemyy1m9en9"/>

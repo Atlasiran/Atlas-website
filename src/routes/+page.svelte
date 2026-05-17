@@ -98,7 +98,7 @@
         </a>
 
         <a
-            href="https://atlasiran.github.io/Atlas-website/graph"
+            href="https://AtlasIran.github.io/Atlas-website/graph"
             class="nav-strip-card"
         >
             <ChartNetwork class="nav-strip-icon" />
@@ -168,7 +168,7 @@
                 <span class="step-num">۳</span>
                 <p>
                     با ما
-                    <a href="mailto:hi@atlasiran.org" class="collab-link"
+                    <a href="mailto:hi@AtlasIran.org" class="collab-link"
                         >تماس بگیرید</a
                     >.
                 </p>

@@ -3,7 +3,7 @@
 
 A bilingual (Persian / English) SvelteKit website that maps Iranian civil-society organizations. RTL-first layout, pre-rendered from Markdown frontmatter files.
 
-**Live site:** [atlasiran.org](https://atlasiran.org)
+**Live site:** [AtlasIran.org](https://AtlasIran.org)
 
 ---
 
@@ -20,7 +20,7 @@ A bilingual (Persian / English) SvelteKit website that maps Iranian civil-societ
 ## Getting Started
 
 ```bash
-git clone https://github.com/Atlasiran/Atlas-website.git
+git clone https://github.com/AtlasIran/Atlas-website.git
 cd Atlas-website
 npm install
 npm run dev          # → http://localhost:5173

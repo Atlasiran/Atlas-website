@@ -124,7 +124,7 @@ Current section order (top → bottom):
 ## Report/Edit Flow
 
 The "درخواست ویرایش اطلاعات" button uses a `mailto:` link:
-- **To**: `hi@atlasiran.org`
+- **To**: `hi@AtlasIran.org`
 - **Subject**: `درخواست ویرایش نهاد {orgName}`
 - **Body**: includes the page URL automatically
 
