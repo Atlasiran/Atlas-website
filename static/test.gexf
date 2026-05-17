@@ -4110,14 +4110,14 @@
         <viz:size value="1"/>
         <viz:position x="62.4232" y="-197.7821"/>
       </node>
-      <node id="92883f14-115e-50b5-863e-a4a749cf2ca0" label="کنگره آزادی ایرانیان">
+      <node id="92883f14-115e-50b5-863e-a4a749cf2ca0" label="کنگره آزادی ایران">
         <attvalues>
-          <attvalue for="name" value="کنگره آزادی ایرانیان"/>
+          <attvalue for="name" value="کنگره آزادی ایران"/>
           <attvalue for="@id" value="92883f14-115e-50b5-863e-a4a749cf2ca0"/>
           <attvalue for="@typeId" value="org-type"/>
           <attvalue for="@labels" value="Political Party"/>
           <attvalue for="English Name" value="Iran Freedom Congress"/>
-          <attvalue for="Full name" value="کنگره آزادی ایرانیان"/>
+          <attvalue for="Full name" value="کنگره آزادی ایران"/>
           <attvalue for="Location(s)" value="انگلستان، لندن"/>
           <attvalue for="About" value="https://www.ifcongress.org/en#purpose"/>
           <attvalue for="reference" value="https://www.ifcongress.org/"/>

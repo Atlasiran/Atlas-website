@@ -20,6 +20,6 @@ export const socialLinks = [
     },
     {
         type: "x",
-        link: "https://x.com/Atlasworker"
+        link: "https://x.com/AtlasIranOrg"
     }
 ];

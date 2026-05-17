@@ -66,8 +66,8 @@
     <meta property="og:site_name" content={siteName} />
     <meta property="og:description" content={siteDescription} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Atlasworker" />
-    <meta name="twitter:creator" content="@Atlasworker" />
+    <meta name="twitter:site" content="@AtlasIranOrg" />
+    <meta name="twitter:creator" content="@AtlasIranOrg" />
 </svelte:head>
 <Toaster />
 
