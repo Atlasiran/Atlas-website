@@ -36,7 +36,19 @@
 
 <svelte:head>
     <title>اطلس جامعه مدنی ایران - صفحه‌ی اصلی</title>
-    <meta property="og:image" content="{assets}/twitter_banner.png" />
+    <meta name="description" content="نقشه‌برداری، تحلیل و توانمندسازی شبکه‌ی جنبش‌های آزادی‌خواه ایران" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="اطلس جامعه مدنی ایران" />
+    <meta property="og:description" content="نقشه‌برداری، تحلیل و توانمندسازی شبکه‌ی جنبش‌های آزادی‌خواه ایران" />
+    <meta property="og:image" content="{assets}/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://AtlasIran.org" />
+    <meta property="og:site_name" content="اطلس جامعه مدنی ایران" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="اطلس جامعه مدنی ایران" />
+    <meta name="twitter:description" content="نقشه‌برداری، تحلیل و توانمندسازی شبکه‌ی جنبش‌های آزادی‌خواه ایران" />
+    <meta name="twitter:image" content="{assets}/og.png" />
 </svelte:head>
 
 <!-- ═══ HERO ═══ -->
