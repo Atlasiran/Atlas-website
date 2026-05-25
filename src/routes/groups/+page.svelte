@@ -1,22 +1,13 @@
 <script>
-    import Button from "@/components/ui/button/button.svelte";
-    import { onMount } from "svelte";
     import * as Card from "$lib/components/ui/card/index.js";
-    import Link from "lucide-svelte/icons/link";
-    import Scale from "lucide-svelte/icons/scale";
-    import ScrollText from "lucide-svelte/icons/scroll-text";
-    import Fullscreen from "lucide-svelte/icons/fullscreen";
-    import MapPin from "lucide-svelte/icons/map-pin";
-    import Users from "lucide-svelte/icons/users";
-    import * as Tooltip from "$lib/components/ui/tooltip/index.js";
-    import ListAllGroups from "@/components/ListAllGroups.svelte";
-    import Header from "@/components/layout/Header.svelte";
-    import Hash from "lucide-svelte/icons/hash";
+    import CreateNewModal from "@/components/CreateNewModal.svelte";
     import EditModal from "@/components/EditModal.svelte";
-    import CreateNewModal from "@/components/CreateNewModal.svelte"; // Import CreateNewModal
-    import { authStore } from "$lib/stores/authStore";
-    import { getEntities, fixNamesInDB, deleteEntity } from "$lib/api";
+    import ListAllGroups from "@/components/ListAllGroups.svelte";
+    import { onMount } from "svelte";
+    // Import CreateNewModal
     import { base } from "$app/paths";
+    import { deleteEntity, fixNamesInDB, getEntities } from "$lib/api";
+    import { authStore } from "$lib/stores/authStore";
 
     let data = [];
     let editOpen = false;
@@ -29,7 +20,7 @@
 
     let stats = [
         { title: "تعداد کل گروه‌های فعال", value: 0 },
-        { title: "اخرین بروزرسانی", value: "۱۴۰۳/۰۸/۱۰" },
+        { title: "اخرین بروزرسانی", value: "۱۴۰۵/۰۲/۲۷" },
     ];
 
     let menuActions = [];
@@ -99,11 +90,15 @@
         }
 
         if (!isAuth) {
-            const POLITICAL_TYPES = new Set(['حزب', 'سازمان سیاسی', 'شورا / کنگره / ائتلاف']);
+            const POLITICAL_TYPES = new Set([
+                "حزب",
+                "سازمان سیاسی",
+                "شورا / کنگره / ائتلاف",
+            ]);
             fetch(`${base}/data/data.json`)
                 .then((response) => response.json())
                 .then((json) => {
-                    data = json.filter(e => !POLITICAL_TYPES.has(e.org_type));
+                    data = json.filter((e) => !POLITICAL_TYPES.has(e.org_type));
                     stats[0].value = data.length;
                     _fetchDataState = "SUCCESS";
                 })
@@ -179,11 +174,13 @@
     <div class="mb-32">
         <h1 class="text-4xl font-bold text-[#1E3A6B] mb-4">نهادها</h1>
         <p class="text-justify text-[rgba(30,58,107,0.64)]">
-            در این بخش می‌توانید اطلاعات مربوط به نهادهای مدنی را
-            مشاهده کنید. این نهادها بر اساس مستندات عمومی جمع‌آوری شده‌اند. اگر اطلاعاتی در این
-            اطلس ناقص یا نادرست است، لطفن به ما
-            اطلاع بدهید. برای اطلاعات بیشتر
-            به بخش <a href="{base}/p/collaborate" class="underline hover:text-[#1E3A6B]">«همکاری»</a> مراجعه کنید.
+            در این بخش می‌توانید اطلاعات مربوط به نهادهای مدنی را مشاهده کنید.
+            این نهادها بر اساس مستندات عمومی جمع‌آوری شده‌اند. اگر اطلاعاتی در
+            این اطلس ناقص یا نادرست است، لطفن به ما اطلاع بدهید. برای اطلاعات
+            بیشتر به بخش <a
+                href="{base}/p/collaborate"
+                class="underline hover:text-[#1E3A6B]">«همکاری»</a
+            > مراجعه کنید.
         </p>
     </div>
 
