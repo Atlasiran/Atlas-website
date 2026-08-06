@@ -55,6 +55,26 @@
                 : null,
     };
 
+    function isDocumentLink(value) {
+        if (!defined(value)) return false;
+        return (
+            value.startsWith("http://") ||
+            value.startsWith("https://") ||
+            value.startsWith("/") ||
+            value.includes(".pdf") ||
+            value.includes(".doc") ||
+            value.includes(".docx")
+        );
+    }
+
+    function documentLink(value) {
+        if (value.startsWith("http://") || value.startsWith("https://")) {
+            return value;
+        }
+        const normalized = value.startsWith("/") ? value : `/${value}`;
+        return `${base}${normalized}`;
+    }
+
     function defined(v) {
         return v && v !== "None" && v.trim() !== "";
     }
@@ -268,9 +288,9 @@
                         >
                             {#if defined(m.coc) || defined(m.manifest)}
                                 {#if defined(m.coc)}
-                                    {#if m.coc.startsWith("http")}
+                                    {#if isDocumentLink(m.coc)}
                                         <a
-                                            href={m.coc}
+                                            href={documentLink(m.coc)}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70"
@@ -283,9 +303,9 @@
                                 {#if defined(m.coc) && defined(m.manifest)}<br
                                     />{/if}
                                 {#if defined(m.manifest)}
-                                    {#if m.manifest.startsWith("http")}
+                                    {#if isDocumentLink(m.manifest)}
                                         <a
-                                            href={m.manifest}
+                                            href={documentLink(m.manifest)}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             class="inline-flex items-center gap-1 text-[#1E3A6B] underline hover:opacity-70"
