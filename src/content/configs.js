@@ -7,6 +7,7 @@ export const defaultHeaderLinks = [
     { name: "صفحه اصلی", link: "/" },
     { name: "نهادها", link: "/groups" },
     { name: "احزاب و سازمان‌های سیاسی", link: "/parties" },
+    { name: "اسناد بنیادین", link: "/constitutions" },
     { name: "گراف", link: "/graph" },
     { name: "همکاری", link: "/p/collaborate" },
     { name: "درباره ما", link: "/p/about-us" },

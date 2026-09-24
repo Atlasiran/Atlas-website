@@ -1,0 +1,3 @@
+[submodule "modules/constitutions"]
+	path = modules/constitutions
+	url = https://github.com/Atlasiran/constitutions.git

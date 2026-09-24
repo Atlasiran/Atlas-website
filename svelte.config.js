@@ -44,7 +44,7 @@ const config = {
     },
 
     prerender: {
-      entries: ['*', '/parties', '/groups', '/graph', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths(), ...getAllBlogPaths()],
+      entries: ['*', '/parties', '/groups', '/graph', '/constitutions', '/api/pages/page/*', '/api/posts/page/*', ...getAllOPPaths(), ...getAllBlogPaths()],
       handleHttpError: 'warn'
     },
 

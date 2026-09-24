@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "python3 deploy/md_to_json.py src/content/org-pages --output static/data/data.json && vite build",
+		"build": "npm run build:constitutions && python3 deploy/md_to_json.py src/content/org-pages --output static/data/data.json && vite build",
+		"build:constitutions": "python3 modules/constitutions/pipeline/build_module.py --out static/modules/constitutions",
 		"gen:og": "pip3 install -q Pillow arabic-reshaper python-bidi PyYAML && python3 deploy/gen_org_og_images.py",
 		"preview": "vite preview"
 	},
