@@ -23,3 +23,6 @@ vite.config.ts.timestamp-*
 
 # Built from modules/constitutions by "npm run build:constitutions"
 /static/modules
+
+# Built from the org pages by deploy/md_to_json.py
+/static/data/relations.json

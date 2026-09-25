@@ -4,7 +4,8 @@ Generate static/test.gexf from static/data/data.json.
 
 Org nodes are labelled "Organization" or "Political Party" depending on org_type.
 Country nodes (one per unique normalised location) are labelled "Country".
-Each org gets a "BASED IN" edge pointing to its country node.
+Each org gets a "BASED IN" edge pointing to its country node, and one edge per
+relation it declares (see deploy/md_to_json.py), coloured by relation type.
 Run from the repo root:
     python3 deploy/gen_gexf.py
 """
@@ -22,6 +23,16 @@ DATA_JSON = Path("static/data/data.json")
 OUT_GEXF = Path("static/test.gexf")
 
 POLITICAL_ORG_TYPES = {"حزب", "سازمان سیاسی", "شورا / کنگره / ائتلاف"}
+
+# Relation edges: GEXF label and colour per relation type
+RELATION_EDGES = {
+    "member_of":         ("MEMBER OF",         (14, 187, 144)),   # teal
+    "affiliated_with":   ("AFFILIATED WITH",   (140, 218, 245)),  # sky
+    "coalition_partner": ("COALITION PARTNER", (30, 58, 107)),    # navy
+    "split_from":        ("SPLIT FROM",        (230, 126, 34)),
+    "merged_into":       ("MERGED INTO",       (155, 89, 182)),
+    "successor_of":      ("SUCCESSOR OF",      (127, 140, 141)),
+}
 
 # Map raw/variant location strings → canonical country label
 LOCATION_NORMALISE = {
@@ -144,7 +155,7 @@ def main():
 
     # Edge attribute schema
     lines.append('    <attributes class="edge">')
-    for attr_id, title in [("@id", "@id"), ("@typeId", "@typeId"), ("@type", "@type")]:
+    for attr_id, title in [("@id", "@id"), ("@typeId", "@typeId"), ("@type", "@type"), ("status", "status"), ("source", "source")]:
         lines.append(f'      <attribute id="{attr_id}" title="{title}" type="string"/>')
     lines.append("    </attributes>")
 
@@ -233,6 +244,25 @@ def main():
         lines.append(f'          <attvalue for="@type" value="BASED IN"/>')
         lines.append("        </attvalues>")
         lines.append("      </edge>")
+
+    for org in data:
+        for rel in org.get("relations") or []:
+            if rel.get("target") not in org_ids or rel.get("type") not in RELATION_EDGES:
+                continue   # md_to_json.py rejects these; skip rather than draw a broken edge
+            label, (r, g, b) = RELATION_EDGES[rel["type"]]
+            src, dst = org_ids[org["id"]], org_ids[rel["target"]]
+            edge_id = stable_id("atlas-edge", f"{src}-{rel['type']}->{dst}")
+            type_id = stable_id("atlas-edge-type", label)
+            lines.append(f'      <edge id="{edge_id}" source="{src}" target="{dst}" weight="1" label="{label} (1)">')
+            lines.append("        <attvalues>")
+            lines.append(f'          <attvalue for="@id" value="{edge_id}"/>')
+            lines.append(f'          <attvalue for="@typeId" value="{type_id}"/>')
+            lines.append(f'          <attvalue for="@type" value="{label}"/>')
+            lines.append(f'          <attvalue for="status" value="{esc(rel.get("status", ""))}"/>')
+            lines.append(f'          <attvalue for="source" value="{esc(rel.get("source", ""))}"/>')
+            lines.append("        </attvalues>")
+            lines.append(f'        <viz:color r="{r}" g="{g}" b="{b}"/>')
+            lines.append("      </edge>")
 
     lines.append("    </edges>")
     lines.append("  </graph>")

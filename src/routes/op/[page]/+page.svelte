@@ -10,6 +10,43 @@
     const m = data.meta;
     const { PostContent } = data;
 
+    // Relations with other organisations; each one carries its public source and a status
+    const REL_OUT = {
+        member_of: "عضو",
+        affiliated_with: "وابسته به",
+        coalition_partner: "هم‌پیمان با",
+        split_from: "منشعب از",
+        merged_into: "ادغام‌شده در",
+        successor_of: "جانشین",
+    };
+    const REL_IN = {
+        member_of: "اعضا",
+        affiliated_with: "نهادهای وابسته",
+        coalition_partner: "هم‌پیمان با",
+        split_from: "انشعاب‌ها",
+        merged_into: "ادغام‌شده در این نهاد",
+        successor_of: "جانشینان",
+    };
+    const REL_STATUS = {
+        self_declared: "به اعلام خود نهاد",
+        documented: "مستند",
+        disputed: "مورد مناقشه",
+    };
+    const relationGroups = (() => {
+        const groups = new Map();
+        const add = (key, label, r) => {
+            if (!groups.has(key)) groups.set(key, { label, items: [] });
+            groups.get(key).items.push(r);
+        };
+        for (const r of data.relations?.out || [])
+            add(r.type === "coalition_partner" ? r.type : `out:${r.type}`, REL_OUT[r.type], r);
+        for (const r of data.relations?.in || [])
+            add(r.type === "coalition_partner" ? r.type : `in:${r.type}`, REL_IN[r.type], r);
+        return [...groups.values()];
+    })();
+    const relationDates = (r) =>
+        [r.since, r.until].some(defined) ? `${r.since || "?"} – ${r.until || "اکنون"}` : "";
+
     const orgName = [m.name_fa, m.name_en, m.name_short, m.title].find(defined);
 
     const ORG_TYPE_LABELS = {
@@ -320,6 +357,45 @@
                             {/if}
                         </p>
                     </div>
+
+                    <!-- پیوندها و وابستگی‌ها -->
+                    {#if relationGroups.length}
+                        <div class="mb-4">
+                            <h2 class="font-semibold text-[#1E3A6B] mb-0.5 text-sm">
+                                پیوندها و وابستگی‌ها
+                            </h2>
+                            {#each relationGroups as g}
+                                <h3 class="text-[rgba(30,58,107,0.72)] text-xs font-medium mt-2 mb-1">
+                                    {g.label}
+                                </h3>
+                                <ul class="text-sm leading-relaxed space-y-1">
+                                    {#each g.items as r}
+                                        <li class="text-[rgba(30,58,107,0.72)] break-words">
+                                            <a
+                                                href="{base}{r.org.pageLink}"
+                                                class="text-[#1E3A6B] underline hover:opacity-70"
+                                                >{r.org.name_fa || r.org.name_en}</a
+                                            >
+                                            {#if relationDates(r)}<span class="text-xs"> ({relationDates(r)})</span>{/if}
+                                            <span
+                                                class="text-xs px-1.5 py-0.5 rounded {r.status === 'disputed'
+                                                    ? 'bg-[#EDE3C7] text-[#1E3A6B]'
+                                                    : 'bg-[rgba(30,58,107,0.07)]'}"
+                                                >{REL_STATUS[r.status]}</span
+                                            >
+                                            <a
+                                                href={r.source}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-xs underline hover:opacity-70"
+                                                >منبع ↗</a
+                                            >
+                                        </li>
+                                    {/each}
+                                </ul>
+                            {/each}
+                        </div>
+                    {/if}
 
                     <!-- درباره -->
                     <div class="mb-4">
