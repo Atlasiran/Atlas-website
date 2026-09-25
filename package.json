@@ -10,7 +10,6 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-cloudflare": "^7.2.8",
 		"@sveltejs/adapter-static": "^3.0.3",
 		"@sveltejs/kit": "^2.0.0",
@@ -34,8 +33,6 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.5.0",
 		"@supabase/supabase-js": "^2.45.1",
-		"@types/webgl2": "^0.0.11",
-		"add": "^2.0.6",
 		"bits-ui": "^0.21.13",
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.18",
@@ -48,10 +45,7 @@
 		"mdsvex-relative-images": "^1.0.3",
 		"mode-watcher": "^0.4.1",
 		"rehype-external-links": "^3.0.0",
-		"shadcn-svelte": "^0.13.0",
 		"sigma": "^3.0.0-beta.26",
-		"sonner": "^1.5.0",
-		"svelte-exmarkdown": "^3.0.5",
 		"svelte-sonner": "^0.3.27",
 		"tailwind-merge": "^2.4.0",
 		"tailwind-variants": "^0.2.1"
