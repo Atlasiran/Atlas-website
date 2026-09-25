@@ -26,11 +26,15 @@ OUT_DIR = BASE / "static/og/op"
 # Use Shabnam-FD (pre-composed Arabic Presentation Forms) — works with PIL's basic
 # freetype renderer on Linux (Cloudflare). Vazirmatn uses OpenType GSUB which PIL
 # does not apply on Linux, causing broken unjoined letters.
+# The text is reshaped and reordered here (see `rtl_render`), so the font must use the basic
+# layout: with raqm (bundled with recent Pillow) Pillow reorders it again, reversing it.
 FONT_BOLD = BASE / "static/fonts/shabnam/Shabnam-Bold-FD.ttf"
 FONT_REG = BASE / "static/fonts/shabnam/Shabnam-FD.ttf"
 if not FONT_BOLD.exists():
     FONT_BOLD = BASE / "static/fonts/vazirmatn/Vazirmatn-Bold.ttf"
     FONT_REG = BASE / "static/fonts/vazirmatn/Vazirmatn-Regular.ttf"
+
+BASIC = ImageFont.Layout.BASIC
 
 W, H = 1200, 630
 
@@ -256,12 +260,12 @@ def generate(m: dict, out_path: Path) -> None:
     draw.rectangle([56, 64, 62, H - 64], fill=GOLD)
 
     # ── fonts ────────────────────────────────────────────────────
-    f_name_lg = ImageFont.truetype(str(FONT_BOLD), 64)
-    f_name_sm = ImageFont.truetype(str(FONT_BOLD), 44)
-    f_meta = ImageFont.truetype(str(FONT_REG),  28)
-    f_desc = ImageFont.truetype(str(FONT_REG),  24)
-    f_brand_b = ImageFont.truetype(str(FONT_BOLD), 22)
-    f_brand = ImageFont.truetype(str(FONT_REG),  21)
+    f_name_lg = ImageFont.truetype(str(FONT_BOLD), 64, layout_engine=BASIC)
+    f_name_sm = ImageFont.truetype(str(FONT_BOLD), 44, layout_engine=BASIC)
+    f_meta = ImageFont.truetype(str(FONT_REG), 28, layout_engine=BASIC)
+    f_desc = ImageFont.truetype(str(FONT_REG), 24, layout_engine=BASIC)
+    f_brand_b = ImageFont.truetype(str(FONT_BOLD), 22, layout_engine=BASIC)
+    f_brand = ImageFont.truetype(str(FONT_REG), 21, layout_engine=BASIC)
 
     # ── org logo ─────────────────────────────────────────────────
     LOGO_SIZE = 220
