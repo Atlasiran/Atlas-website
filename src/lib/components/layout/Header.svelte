@@ -98,8 +98,8 @@
             </a>
 
             <Sheet.Root>
-                <Sheet.Trigger>
-                    <Button variant="ghost" class="inline-flex lg:hidden p-2 text-[var(--atlas-navy-64)] hover:text-[var(--atlas-navy)]">
+                <Sheet.Trigger asChild let:builder>
+                    <Button builders={[builder]} variant="ghost" class="inline-flex lg:hidden p-2 text-[var(--atlas-navy-64)] hover:text-[var(--atlas-navy)]">
                         <Menu class="w-5 h-5" />
                     </Button>
                 </Sheet.Trigger>

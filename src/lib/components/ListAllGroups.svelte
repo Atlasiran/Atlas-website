@@ -2,7 +2,6 @@
     import GroupCardItem from "./GroupCardItem.svelte";
     import { createEventDispatcher, onMount } from "svelte";
     import Button from "@/components/ui/button/button.svelte";
-    import GroupTable from "./GroupTable.svelte";
     import Input from "$lib/components/ui/input/input.svelte";
     import Ellipsis from "lucide-svelte/icons/ellipsis";
     import * as Menubar from "$lib/components/ui/menubar";
@@ -184,7 +183,6 @@
     </div>
 {/if}
 
-<!-- <GroupTable {data}/> -->
 
 <style>
 </style>
