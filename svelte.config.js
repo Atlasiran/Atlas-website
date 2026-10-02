@@ -40,7 +40,8 @@ const config = {
     },
 
     paths: {
-      base: useStatic && !dev ? '/Atlas-website' : ''
+      // Pages serves the static build at the root of atlasiran.org (custom domain), not under /Atlas-website
+      base: ''
     },
 
     prerender: {

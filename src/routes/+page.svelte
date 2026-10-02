@@ -119,7 +119,7 @@
         </a>
 
         <a
-            href="https://AtlasIran.github.io/Atlas-website/graph"
+            href="{base}/graph"
             class="nav-strip-card"
         >
             <ChartNetwork class="nav-strip-icon" />
