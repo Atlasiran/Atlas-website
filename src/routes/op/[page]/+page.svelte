@@ -87,7 +87,8 @@
         .filter(Boolean)
         .join(" | ");
     const ogDescription = (() => {
-        if (defined(m.about)) return m.about;
+        // Some "about" fields hold only a link to the organisation's own page; that is no description
+        if (defined(m.about) && !/^https?:\/\/\S+$/.test(m.about.trim())) return m.about;
         const parts = [
             defined(m.expertise) ? m.expertise : null,
             defined(m.political_orientation) ? m.political_orientation : null,
@@ -119,9 +120,8 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:url" content={ogUrl} />
-    <meta property="og:site_name" content="اطلس جامعه مدنی ایران" />
     <meta name="description" content={ogDescription} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={ogUrl} />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImage} />
@@ -132,7 +132,7 @@
         <article class="w-full mx-auto max-w-[960px] pt-10 pb-16">
             <!-- Header -->
             <div class="mb-8 flex items-start gap-5">
-                {#if defined(m.logo)}
+                {#if defined(m.logo) && m.logo !== "logos/temporary.png"}
                     <img
                         src="{base}/{m.logo}"
                         alt={orgName}

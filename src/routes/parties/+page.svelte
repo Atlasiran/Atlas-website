@@ -1,4 +1,5 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import { base } from "$app/paths";
     import * as Card from "$lib/components/ui/card/index.js";
     import ListAllGroups from "@/components/ListAllGroups.svelte";
@@ -21,9 +22,7 @@
     });
 </script>
 
-<svelte:head>
-    <title>اطلس جامعه مدنی ایران - احزاب و سازمان‌های سیاسی</title>
-</svelte:head>
+<Seo title="احزاب و سازمان‌های سیاسی" description="احزاب و سازمان‌های سیاسی ایرانی در یک فهرست: گرایش، مکان، مرامنامه و پیوندهای هر سازمان." />
 
 <div class="container mx-auto pt-8">
     <div class="mb-32">

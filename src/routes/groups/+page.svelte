@@ -1,4 +1,5 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import * as Card from "$lib/components/ui/card/index.js";
     import CreateNewModal from "@/components/CreateNewModal.svelte";
     import EditModal from "@/components/EditModal.svelte";
@@ -157,9 +158,7 @@
     $: updateMenuActions($authStore.isAuthenticated);
 </script>
 
-<svelte:head>
-    <title>اطلس جامعه مدنی ایران - نهادها</title>
-</svelte:head>
+<Seo title="نهادها" description="نهادهای جامعه‌ی مدنی ایران در یک فهرست: زمینه‌ی کار، مکان، مرامنامه و پیوندهای هر نهاد." />
 
 <EditModal
     id={editData?.id}

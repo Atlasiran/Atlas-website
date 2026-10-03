@@ -1,4 +1,5 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import { onMount } from "svelte";
     import Header from "@/components/layout/Header.svelte";
     import Footer from "@/components/layout/Footer.svelte";
@@ -7,9 +8,7 @@
 	const posts = data.posts;
 </script>
 
-<svelte:head>
-    <title>اطلس جامعه مدنی ایران - وبلاگ</title>
-</svelte:head>
+<Seo title="صفحه‌های نهادها" />
 
 <Header />
 

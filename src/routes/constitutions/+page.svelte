@@ -1,4 +1,5 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import { base } from "$app/paths";
     import { onDestroy, onMount } from "svelte";
 
@@ -28,12 +29,9 @@
     onDestroy(() => app?.destroy());
 </script>
 
+<Seo title="اسناد بنیادین" description="پیش‌نویس‌های قانون اساسی ایران، منشورها و اساسنامه‌ها: متن کامل، تفکیک‌شده به اصول و قابل مقایسه." />
+
 <svelte:head>
-    <title>اطلس جامعه مدنی ایران - اسناد بنیادین</title>
-    <meta
-        name="description"
-        content="پیش‌نویس‌های قانون اساسی ایران، منشورها و اساسنامه‌ها: متن کامل، تفکیک‌شده به اصول و قابل مقایسه."
-    />
     <link rel="stylesheet" href="{moduleUrl}app.css" />
     <link rel="stylesheet" href="{moduleUrl}atlas-theme.css" />
 </svelte:head>

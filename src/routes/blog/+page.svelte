@@ -1,13 +1,12 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import { onMount } from "svelte";
     import Header from "@/components/layout/Header.svelte";
     export let data;
 	const posts = data.posts;
 </script>
 
-<svelte:head>
-    <title>اطلس جامعه مدنی ایران - وبلاگ</title>
-</svelte:head>
+<Seo title="وبلاگ" />
 
 <Header />
 

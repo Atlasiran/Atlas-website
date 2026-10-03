@@ -1,4 +1,5 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import BlogPageLayout from "@/components/layout/BlogPageLayout.svelte";
     import Contact from "lucide-svelte/icons/contact";
     export let data;
@@ -10,6 +11,8 @@
     } = data.meta;
     const { PostContent } = data;
 </script>
+
+<Seo {title} type="article" />
 
 <BlogPageLayout>
     <article class="w-full mx-auto max-w-[800px] prose lg:prose-xl pt-10">

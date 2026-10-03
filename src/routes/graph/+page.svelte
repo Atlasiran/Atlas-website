@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Seo from "@/components/Seo.svelte";
     import { goto } from "$app/navigation";
     import { base } from "$app/paths";
     import { Button } from "$lib/components/ui/button/index";
@@ -244,6 +245,8 @@
         await drawGraph(gexf);
     });
 </script>
+
+<Seo title="گراف" description="نقشه‌ی شبکه‌ای نهادها و سازمان‌های اطلس و پیوندهای میان آن‌ها." />
 
 <!-- Graph container -->
 <div class="graph-view">

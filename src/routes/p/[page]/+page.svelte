@@ -1,4 +1,5 @@
 <script>
+    import Seo from "@/components/Seo.svelte";
     import BlogPageLayout from "@/components/layout/BlogPageLayout.svelte";
     import Contact from "lucide-svelte/icons/contact";
     import Header from "@/components/layout/Header.svelte";
@@ -8,6 +9,8 @@
     const { title, date, updated, isSvx } = data.meta;
     const { PostContent } = data;
 </script>
+
+<Seo {title} />
 
 {#if !isSvx}
     <BlogPageLayout>

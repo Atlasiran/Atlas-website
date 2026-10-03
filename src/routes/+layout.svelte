@@ -8,7 +8,7 @@
     import { authStore } from "$lib/stores/authStore";
     import { supabase } from "$lib/supabaseClient";
     import { onMount } from "svelte";
-    import { siteDescription, siteName, siteTitle } from "../content/configs";
+    import { siteName } from "../content/configs";
 
     import "../app.css";
     export let data = {};
@@ -62,9 +62,7 @@
 </script>
 
 <svelte:head>
-    <meta property="og:title" content={siteTitle} />
     <meta property="og:site_name" content={siteName} />
-    <meta property="og:description" content={siteDescription} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@AtlasIranOrg" />
     <meta name="twitter:creator" content="@AtlasIranOrg" />

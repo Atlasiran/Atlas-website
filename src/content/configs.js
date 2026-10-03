@@ -1,6 +1,7 @@
 export const siteTitle = "اطلس جامعه مدنی ایران";
 export const siteName = "اطلس جامعه مدنی ایران";
-export const siteDescription = "";
+export const siteDescription = "نقشه‌برداری، تحلیل و توانمندسازی شبکه‌ی جنبش‌های آزادی‌خواه ایران";
+export const siteUrl = "https://atlasiran.org";
 export const postsPerPage = 10;
 
 export const defaultHeaderLinks = [
@@ -17,7 +18,7 @@ export const defaultHeaderLinks = [
 export const socialLinks = [
     {
         type: "github",
-        link: "https://github.com/tcfev/Atlas"
+        link: "https://github.com/Atlasiran/Atlasiran.org"
     },
     {
         type: "x",
