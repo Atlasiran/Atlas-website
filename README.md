@@ -11,7 +11,7 @@ A bilingual (Persian / English) SvelteKit website that maps Iranian civil-societ
 
 | Layer | Tool |
 |---|---|
-| Framework | SvelteKit 2 (Svelte 4) |
+| Framework | SvelteKit 2 (Svelte 5) |
 | Styling | Tailwind CSS 3 |
 | Content | MDsveX (`.md` files in `src/content/org-pages/`) |
 | Backend | Supabase |
@@ -20,8 +20,8 @@ A bilingual (Persian / English) SvelteKit website that maps Iranian civil-societ
 ## Getting Started
 
 ```bash
-git clone https://github.com/AtlasIran/Atlas-website.git
-cd Atlas-website
+git clone https://github.com/Atlasiran/Atlasiran.org.git
+cd Atlasiran.org
 npm install
 npm run dev          # → http://localhost:5173
 ```
